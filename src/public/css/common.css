@@ -1,0 +1,38 @@
+.header__logo{
+    color:#3560F6;
+    font-size: 32px;
+    padding:20px;
+}
+
+body{
+    background-color:#EEEEEE;
+}
+
+#menu__icon {
+    font-size: 32px;
+    padding:0 5px;
+    margin-right:10px;
+    font-weight: bold;
+    background-color: #3560F6;
+    color:#EEEEEE;
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px gray;
+}
+
+
+.header {
+    width: 100%;
+    padding:20px;
+}
+
+.rese {
+    font-size: 32px;
+    font-weight: bold;
+    color:#3560F6;
+    text-decoration: none;
+}
+
+.form__error {
+    color: red;
+    margin: 0 10px;
+}

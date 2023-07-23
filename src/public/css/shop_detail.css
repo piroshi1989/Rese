@@ -1,0 +1,100 @@
+.shop__detail__contant {
+    padding: 30px 0;
+    display:flex;
+}
+
+.left__content__shop,
+.right__content__reservation {
+    width: 45%;
+    margin:0 20px;
+}
+
+/*左側の設定*/
+.shop__content {
+    width: 100%;
+    margin-top:30px;
+}
+
+.shop__content-top {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.shop__title {
+    margin: auto 0;
+}
+
+.shop__photo img {
+    width: 100%;
+    border-radius: 3px 3px 0 0;
+}
+
+#reverse__icon {
+    font-size: 24px;
+    padding: 0 5px;
+    margin-right: 10px;
+    font-weight: bold;
+    background-color: #fff;
+    color: black;
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px gray;
+}
+
+.shop__title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.shop__info {
+    margin-top:20px;
+}
+
+.shop__detail{
+    margin-top:20px;
+}
+
+
+
+
+/*ここまで左側*/
+
+/*ここから右側*/
+.right__content__reservation{
+    background-color: #3560F6;
+    color: #fff;
+    border-radius: 3px;
+    position: relative;
+    padding-bottom: 120px;
+    box-sizing: border-box;
+
+}
+
+.reservation__content__title {
+    margin: 20px;
+}
+
+.reservation__table{
+    background-color:#5580F7 ;
+    padding:20px;
+    margin:20px;
+}
+
+.reservation__botttom input{
+    width:100%;
+    position: absolute;
+        /*←絶対位置*/
+        bottom: 0;
+        /*下に固定*/
+        padding:10px;
+        background-color:#003FF5;
+        color:#fff;
+        border:none;
+        border-radius: 0 0 3px 3px;
+}
+
+
+
+.reservation__input__field{
+    margin:20px;
+}

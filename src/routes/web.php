@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\MyPageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/menu', [MenuController::class, 'menuView']);
+Route::get('/shop_all', [ShopController::class, 'shopView']);
+Route::post('/shop_all/favorite', [ShopController::class, 'favorite']);
+Route::get('/shop_all/{id}', [ShopController::class, 'shopDetailView']);
+
+Route::middleware('auth')->group(function () {
+    Route::get('/mypage', [MyPageController::class, 'myPageView']);
+    Route::post('/shop_all/{id}', [ShopController::class, 'ReservationStore']);
+    //Route::get('/thanks', [ShopController::class, 'thanksView']);
+    Route::delete('/mypage/delete', [MyPageController::class, 'reservationDestroy']);
 });
