@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Like;
+use Illuminate\Support\Facades\Auth;
 
 class Shop extends Model
 {
@@ -21,17 +23,22 @@ class Shop extends Model
         return $this->belongsTo(Area::class);
     }
 
-    public function reservation()
+    public function reservations()
     {
     return $this->hasMany(Reservation::class);
     }
 
-    public function favorite()
+    public function likes()
     {
-    return $this->hasMany(Favorite::class);
+    return $this->hasMany(Like::class);
     }
 
-    public function isLikedBy($user): bool {
-        return Favorite::where('user_id', $user->id)->where('shop_id', $this->id)->first() !==null;
-    }
+
+
+        //後でViewで使う、いいねされているかを判定するメソッド。
+public function isLikedBy($user_id): bool
+{
+    // この店舗をお気に入り登録しているかを判定
+    return $this->likes->contains('user_id', $user_id);
+}
 }

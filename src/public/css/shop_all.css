@@ -100,7 +100,7 @@ input{
     font-size: 12px;
 }
 
-#favorite__icon{
+#Like__icon{
     margin:10px;
     font-size: 24px;
 }
@@ -111,6 +111,15 @@ input{
     margin-top:20px;
 }
 
-.liked {
-    color: pink;
+.like-toggle {
+    cursor: pointer;
+    /* アイコンの中身を透明にする */
+}
+
+/* 登録済みのアイテムのスタイル */
+.like-toggle.liked {
+    cursor: pointer;
+    color: red;
+    /* アイコンの色をピンクにする */
+    /* 枠線をピンク色にする（登録済みのアイテムも枠線を持つ） */
 }

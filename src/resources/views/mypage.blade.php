@@ -48,8 +48,8 @@
             </form>
         </div>
 @endforeach
-{{ $reservations->links() }}
 @endif
+{{ $reservations->links() }}
  @if (session('message'))
     </div class="reservation__alert">
    {{session('message')}}
@@ -57,11 +57,35 @@
     @endif
     </div>
     </div>
+        
 
-    <div class = "right__favorites__content">
+
+    <div class = "right__likes__content">
         <h3 class="user__name">{{ $user_name }}さん</h3>
-
+        <div class= "reservation__shops">
+        @foreach($shops as $shop)
+            <div class="shop__content">
+        <div class="shop__photo">
+            <img src="{{asset($shop['imagePath'])}}">
+        </div>
+        <div class="shop__info">
+            <p class="shop__title">{{ $shop['name'] }}</p>
+            <a class="shop__area">#{{ $shop->area->name }}</a>
+            <a class="shop__genre">#{{ $shop->genre->name }}</a>
+            <div class="shop__bottom">
+                <div class="shop__detail__button">
+                    <a href="{{ asset('shop_all' . '/'. $shop['id']) }}">詳しくみる</a>
+                </div>
+                    <span class="likes">
+                        <i class="bi bi-heart-fill"></i>
+                    </span>
+            </div>
+        </div>
     </div>
+    @endforeach
+    </div>
+    </div>
+
 
     </main>
 
