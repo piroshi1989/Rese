@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
-    public function menuView(){
+    public function showMenu(){
         return view('menu');
     }
 }

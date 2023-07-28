@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use App\Models\Shop;
 use App\Models\Area;
 use App\Models\Genre;
+use App\Models\Shop;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -14,34 +13,33 @@ use App\Http\Requests\ReservationRequest;
 
 class ShopController extends Controller
 {
-    public function shopView(){
-        
-        $shops = Shop::with('area', 'genre')->get()->sortBy('id');
-        $user = Auth::user();
+    public function showShop(){
+        $shops = Shop::get()->sortBy('id');
         $shops = $shops->map(function ($shop) {
         $user_id = Auth::id();
-        $genreName = $shop->genre->name; // ジャンル名を取得
-        $romanizedGenreName = str_replace(['焼肉', '寿司', 'ラーメン', 'イタリアン', '居酒屋'], ['yakiniku', 'sushi', 'ramen', 'italian', 'izakaya'], $genreName);        $imageName = $romanizedGenreName . '.jpg';// ジャンル名を画像ファイル名として使用
+        $romanizedGenreName = $shop->genre->romaji_name; // ジャンル名を取得
+        $imageName = $romanizedGenreName . '.jpg';// ジャンル名を画像ファイル名として使用
         $imagePath = 'storage/' . $imageName; // 画像パス
         $shop->imagePath = $imagePath; // 画像パスを追加
-        
-              // お気に入り情報を追加
-        $shop->is_liked = $shop->isLikedBy($user_id);
+
+        $isLiked = $shop->isLikedBy($user_id);
+        $like_id = $isLiked ? $shop->likes->where('user_id', $user_id)->first()->id : null;
+        $shop->is_liked = $shop->isLikedBy($user_id); // お気に入り情報を追加
+        $shop->is_liked = $isLiked;
+        $shop->like_id = $like_id;
 
         return $shop;
         });
-
         $areas = Area::all();
         $genres = Genre::all();
 
-        return view('shop_all', compact('shops', 'areas', 'genres',));
+        return view('shop_all', compact('shops', 'areas', 'genres'));
     }
 
-    public function shopDetailView($id){
+    public function showShopDetail($id){
         $shop = Shop::findOrFail($id);
-        $genreName = $shop->genre->name; // ジャンル名を取得
-        $romanizedGenreName = str_replace(['焼肉', '寿司', 'ラーメン', 'イタリアン', '居酒屋'], ['yakiniku', 'sushi', 'ramen', 'italian', 'izakaya'], $genreName);
-        $imageName = $romanizedGenreName . '.jpg'; // ジャンル名を画像ファイル名として使用
+        $romanizedGenreName = $shop->genre->romaji_name; // ジャンル名を取得
+        $imageName = $romanizedGenreName . '.jpg';// ジャンル名を画像ファイル名として使用
         $imagePath = 'storage/' . $imageName; // 画像のパスを構築\
 
         $today = Carbon::now()->format('Y-m-d');
@@ -58,13 +56,13 @@ class ShopController extends Controller
             $numbers[] = $number;
         }
         //予約人数を1～10人までとして$numbersに格納
-
+        
         return view('shop_detail', compact('shop', 'imagePath','options', 'today', 'numbers'));
     }
 
     public function reservationStore(ReservationRequest $request){
-        $form = $request->all();
-        Reservation::save($form);
+        $reservation = $request->all();
+        Reservation::create($reservation);
         return view('thanks');
     }
 }

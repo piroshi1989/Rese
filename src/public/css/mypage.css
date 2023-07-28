@@ -1,24 +1,28 @@
-.mypage {
+.mypage__content {
     padding: 30px 0;
     display: flex;
 }
 
 .left__reservations__content,
-.right__likes__content {
+.right__liked__content {
     width: 50%;
     margin: 0 5px;
-    border:1px solid black;
+}
+
+.user__name{
+    margin-left:51%;
+}
+
+.mypage__title {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px;
 }
 
 /*左側の設定*/
-.reservation__title {
-    font-size: 24px;
-    font-weight: bold;
-}
-
 .reservation__table {
     background-color: #5580F7;
-    padding: 20px;
+    padding: 5px;
     margin: 20px;
 }
 
@@ -45,12 +49,18 @@
 /*ここまで左側*/
 
 /*ここから右側*/
+.right__liked__content {
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .shop__content {
     background-color: #fff;
     border-radius: 3px;
     box-shadow: 5px 5px 5px gray;
-    width: 44%;
-    margin: 10px;
+    width: 43%;
+    margin: 8px;
     padding-bottom: 5px;
 }
 
@@ -59,14 +69,7 @@
     border-radius: 3px 3px 0 0;
 }
 
-.right__likes__content {
-    padding: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.reservation__shops{
+.liked__shops{
     display:flex;
     flex-wrap: wrap;
 }
@@ -109,4 +112,21 @@
     color: red;
     margin: 10px;
     font-size: 24px;
+}
+
+.reservation__table{
+    color:#fff;
+}
+
+
+.reservation__td{
+    display:inline-block;
+    margin-left:20px;
+}
+
+
+.reservation__form{
+    display:flex;
+    justify-content: space-between;
+    padding:0 10px;
 }

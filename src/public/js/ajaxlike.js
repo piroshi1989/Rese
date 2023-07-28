@@ -1,4 +1,3 @@
-// app.js
 $(document).ready(function() {
   $('.like-toggle').each(function() {
     const $this = $(this);

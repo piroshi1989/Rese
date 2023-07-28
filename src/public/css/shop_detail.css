@@ -53,10 +53,6 @@
 .shop__detail{
     margin-top:20px;
 }
-
-
-
-
 /*ここまで左側*/
 
 /*ここから右側*/
@@ -93,8 +89,20 @@
         border-radius: 0 0 3px 3px;
 }
 
-
-
 .reservation__input__field{
     margin:20px;
 }
+
+.arart__message{
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin:auto;
+}
+
+.form__error{
+    background-color: red;
+    color:#fff;
+    font-size:24px;
+}
+

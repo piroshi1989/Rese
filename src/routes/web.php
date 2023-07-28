@@ -6,6 +6,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\MyPageController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\SearchShopsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,14 +18,15 @@ use App\Http\Controllers\LikeController;
 |
 */
 
-Route::get('/menu', [MenuController::class, 'menuView']);
-Route::get('/shop_all', [ShopController::class, 'shopView']);
-Route::get('/shop_all/{id}', [ShopController::class, 'shopDetailView']);
+Route::get('/menu', [MenuController::class, 'showMenu']);
+Route::get('/shop_all', [ShopController::class, 'showShop']);
+Route::get('/search', [SearchShopsController::class, 'searchShops']);
+Route::get('/shop_all/{id}', [ShopController::class, 'showShopDetail']);
 
 Route::middleware('auth')->group(function () {
-    Route::get('/mypage', [MyPageController::class, 'myPageView']);
+    Route::get('/mypage', [MyPageController::class, 'showMyPage']);
     Route::post('/shop_all/{id}', [ShopController::class, 'ReservationStore']);
+    Route::delete('/mypage/delete', [MyPageController::class, 'reservationDestroy']);
     Route::post('/like',[LikeController::class,'toggleLike']);
     Route::delete('/like/{likeId}', [LikeController::class, 'toggleLike']);
-    Route::delete('/mypage/delete', [MyPageController::class, 'reservationDestroy']);
-});
+    });

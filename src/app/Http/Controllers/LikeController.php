@@ -19,10 +19,10 @@ public function toggleLike(Request $request)
     
     if (!$already_liked) {
         // お気に入り登録がされていない場合は新しくレコードを作成
-        Like::create([
-            'user_id' => $user_id,
-            'shop_id' => $shop_id,
-        ]);
+        $like = new Like;
+        $like->user_id = $user_id;
+        $like->shop_id = $shop_id;
+        $like->save();
 
         $isLiked = true; // お気に入り登録がされた場合はtrueを返す
     } else {
