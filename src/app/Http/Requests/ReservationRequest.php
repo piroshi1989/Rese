@@ -27,7 +27,6 @@ class ReservationRequest extends FormRequest
         $today = Carbon::today();
 
         $rules = [
-            'date' => 'required',
             'time' => 'required',
             // 他のフォームフィールドのバリデーションルールをここに追加
         ];
@@ -42,8 +41,8 @@ class ReservationRequest extends FormRequest
     public function messages()
     {
         return [
-            'date.required' => '日付を入力してください',
             'time.after_or_equal' => '予約可能時間が過ぎています。',
+            // 他のバリデーションエラーメッセージをここに追加
         ];
     }
 }

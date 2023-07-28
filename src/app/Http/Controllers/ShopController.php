@@ -3,43 +3,70 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+use App\Models\Shop;
 use App\Models\Area;
 use App\Models\Genre;
-use App\Models\Shop;
+use App\Models\Favorite;
 use App\Models\Reservation;
-use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Http\Requests\ReservationRequest;
 
 class ShopController extends Controller
 {
-    public function showShop(){
-        $shops = Shop::get()->sortBy('id');
+    public function shopView(){
+        $shops = Shop::with('area', 'genre')->get()->sortBy('id');
+        
         $shops = $shops->map(function ($shop) {
-        $user_id = Auth::id();
-        $romanizedGenreName = $shop->genre->romaji_name; // ジャンル名を取得
-        $imageName = $romanizedGenreName . '.jpg';// ジャンル名を画像ファイル名として使用
+        $genreName = $shop->genre->name; // ジャンル名を取得
+        $romanizedGenreName = str_replace(['焼肉', '寿司', 'ラーメン', 'イタリアン', '居酒屋'], ['yakiniku', 'sushi', 'ramen', 'italian', 'izakaya'], $genreName);        $imageName = $romanizedGenreName . '.jpg';// ジャンル名を画像ファイル名として使用
         $imagePath = 'storage/' . $imageName; // 画像パス
         $shop->imagePath = $imagePath; // 画像パスを追加
-
-        $isLiked = $shop->isLikedBy($user_id);
-        $like_id = $isLiked ? $shop->likes->where('user_id', $user_id)->first()->id : null;
-        $shop->is_liked = $shop->isLikedBy($user_id); // お気に入り情報を追加
-        $shop->is_liked = $isLiked;
-        $shop->like_id = $like_id;
-
         return $shop;
         });
+
         $areas = Area::all();
         $genres = Genre::all();
 
         return view('shop_all', compact('shops', 'areas', 'genres'));
     }
 
-    public function showShopDetail($id){
+    public function favorite(Request $request)
+{
+    $user_id = Auth::user()->id; //1.ログインユーザーのid取得
+    $shop_id = $request->shop_id; //2.投稿idの取得
+    $already_liked = Favorite::where('user_id', $user_id)->where('shop_id', $shop_id)->first(); //3.
+
+    if (!$already_liked) { //もしこのユーザーがこの投稿にまだいいねしてなかったら
+        $favorite = new Favorite; //4.Likeクラスのインスタンスを作成
+        $favorite->shop_id = $shop_id; //Likeインスタンスにreviews_id,user_idをセット
+        $favorite->user_id = $user_id;
+        $favorite->save();
+    } else { //もしこのユーザーがこの投稿に既にいいねしてたらdelete
+        Favorite::where('shop_id', $shop_id)->where('user_id', $user_id)->delete();
+    }
+    //5.この投稿の最新の総いいね数を取得
+    $shops_likes_count = Shops::withCount('favorites')->findOrFail($shop_id)->likes_count;
+    $param = [
+        'shops_likes_count' => $shops_likes_count,
+    ];
+    return response()->json($param); //6.JSONデータをjQueryに返す
+}
+
+public function index(Request $request)
+{
+    $shops = Review::withCount('favorites')->orderBy('id', 'desc')->paginate(10);
+    $param = [
+        'shops' => $shops,
+    ];
+    return view('shops.index', $param);
+}
+
+    public function shopDetailView($id){
         $shop = Shop::findOrFail($id);
-        $romanizedGenreName = $shop->genre->romaji_name; // ジャンル名を取得
-        $imageName = $romanizedGenreName . '.jpg';// ジャンル名を画像ファイル名として使用
+        $genreName = $shop->genre->name; // ジャンル名を取得
+        $romanizedGenreName = str_replace(['焼肉', '寿司', 'ラーメン', 'イタリアン', '居酒屋'], ['yakiniku', 'sushi', 'ramen', 'italian', 'izakaya'], $genreName);
+        $imageName = $romanizedGenreName . '.jpg'; // ジャンル名を画像ファイル名として使用
         $imagePath = 'storage/' . $imageName; // 画像のパスを構築\
 
         $today = Carbon::now()->format('Y-m-d');
@@ -56,13 +83,13 @@ class ShopController extends Controller
             $numbers[] = $number;
         }
         //予約人数を1～10人までとして$numbersに格納
-        
+
         return view('shop_detail', compact('shop', 'imagePath','options', 'today', 'numbers'));
     }
 
     public function reservationStore(ReservationRequest $request){
-        $reservation = $request->all();
-        Reservation::create($reservation);
+        $form = $request->all();
+        Reservation::save($form);
         return view('thanks');
     }
 }

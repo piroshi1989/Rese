@@ -12,8 +12,7 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 //use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
-//use App\Http\Requests\CreateUserRequest;
-use Laravel\Fortify\Contracts\LogoutResponse;
+use App\Http\Requests\CreateUserRequest;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -22,12 +21,7 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-    $this->app->instance(LogoutResponse::class, new class implements LogoutResponse {
-        public function toResponse($request)
-        {
-            return redirect('/shop_all');
-        }
-    });
+        //
     }
 
     /**
