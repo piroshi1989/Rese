@@ -8,7 +8,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -48,12 +47,12 @@ class User extends Authenticatable
         return $this->belongsTo(Genre::class);
     }
 
-public function likes()
-{
-    return $this->hasMany(Like::class);
-}
+    public function favorite()
+    {
+    return $this->hasMany(Favorite::class);
+    }
 
-    public function reservations()
+    public function reservation()
     {
     return $this->hasMany(Reservation::class);
     }

@@ -18,24 +18,8 @@ class ReservationsTableSeeder extends Seeder
         'user_id' => 1,
         'shop_id' => 1,
         'date' => '2021-04-01',
-        'time' => '18:00',
+        'time' => '18:00:00',
         'number' => 2,
-        ]);
-
-        DB::table('reservations')->insert([
-        'user_id' => 1,
-        'shop_id' => 2,
-        'date' => '2024-04-01',
-        'time' => '18:00',
-        'number' => 3,
-        ]);
-
-        DB::table('reservations')->insert([
-        'user_id' => 1,
-        'shop_id' => 4,
-        'date' => '2024-04-01',
-        'time' => '18:00',
-        'number' => 5,
         ]);
     }
 }
