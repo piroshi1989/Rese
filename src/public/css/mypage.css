@@ -1,26 +1,28 @@
-.mypage {
+.mypage__content {
     padding: 30px 0;
     display: flex;
 }
 
 .left__reservations__content,
-.right__favorites__content {
-    width: 45%;
-    margin: 0 20px;
+.right__liked__content {
+    width: 50%;
+    margin: 0 5px;
 }
-.delete-form__button-submit:hover {
-    cursor: pointer;
+
+.user__name{
+    margin-left:51%;
+}
+
+.mypage__title {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px;
 }
 
 /*左側の設定*/
-.reservation__title {
-    font-size: 24px;
-    font-weight: bold;
-}
-
 .reservation__table {
     background-color: #5580F7;
-    padding: 20px;
+    padding: 5px;
     margin: 20px;
 }
 
@@ -31,10 +33,7 @@
     color: #0f5132;
 }
 
-/*ここまで左側*/
-
-/*ここから右側*/
-.right__content__reservation {
+.left__content__reservation {
     background-color: #3560F6;
     color: #fff;
     border-radius: 3px;
@@ -44,19 +43,25 @@
 
 }
 
-.shop__content {
-    width: 100%;
-    margin-top: 30px;
+.delete-form__button-submit:hover {
+    cursor: pointer;
 }
+/*ここまで左側*/
 
-.shop__content-top {
+/*ここから右側*/
+.right__liked__content {
+    padding: 5px;
     display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
-.shop__title {
-    margin: auto 0;
+.shop__content {
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 5px 5px 5px gray;
+    width: 43%;
+    margin: 8px;
+    padding-bottom: 5px;
 }
 
 .shop__photo img {
@@ -64,9 +69,64 @@
     border-radius: 3px 3px 0 0;
 }
 
-.reservation__alert {
-    padding: 10px 30px;
-    border-color: #badbcc;
-    background-color: #d1e7dd;
-    color: #0f5132;
+.liked__shops{
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.shop__info {
+    padding: 20px;
+}
+
+.shop__detail__button {
+    text-decoration: none;
+    font-size: 12px;
+    width: 30%;
+    background-color: #3560F6;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+}
+
+.shop__detail__button a {
+    color: #fff;
+}
+
+.shop__title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.shop__area,
+.shop__genre {
+    font-size: 12px;
+}
+
+.shop__bottom {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.likes {
+    color: red;
+    margin: 10px;
+    font-size: 24px;
+}
+
+.reservation__table{
+    color:#fff;
+}
+
+
+.reservation__td{
+    display:inline-block;
+    margin-left:20px;
+}
+
+
+.reservation__form{
+    display:flex;
+    justify-content: space-between;
+    padding:0 10px;
 }
