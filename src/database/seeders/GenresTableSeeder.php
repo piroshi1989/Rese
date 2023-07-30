@@ -15,6 +15,7 @@ class GenresTableSeeder extends Seeder
     public function run()
     {
       DB::table('genres')->insert([
+<<<<<<< HEAD
         'name' => 'イタリアン',
         'alphabet_name' => 'italian',
         ]);
@@ -37,6 +38,13 @@ class GenresTableSeeder extends Seeder
         DB::table('genres')->insert([
         'name' => '焼肉',
         'alphabet_name' => 'yakiniku',
+=======
+        ['name' => 'イタリアン'],
+        ['name' => 'ラーメン'],
+        ['name' => '居酒屋'],
+        ['name' => '寿司'],
+        ['name' => '焼肉'],
+>>>>>>> origin
         ]);
     }
 }

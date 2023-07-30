@@ -1,15 +1,16 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/menu.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/menu.css') }}">
 @endsection
 
 @section('content')
 <header class="header">
-    <a class="icon-link" href="javascript:history.back()">
-    <i class="bi bi-x-square-fill" id="close__icon" aria-hidden="true"></i>
-    </a>
+<a class="icon-link" href="javascript:history.back()">
+  <i class="bi bi-x-square-fill" id="close__icon" aria-hidden="true"></i>
+</a>
 </header>
+
 <div class="nav__content">
     <nav>
         <ul class="menu-nav">

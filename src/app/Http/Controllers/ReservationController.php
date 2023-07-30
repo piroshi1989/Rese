@@ -18,7 +18,7 @@ class ReservationController extends Controller
         Reservation::find($request->id)->delete();
         return redirect('/mypage')->with('message', '予定を削除しました');
     }
-    
+
     public function reservationUpdate(ReservationRequest $request){
         if(!empty($request)){
         $reservation = $request->all();
