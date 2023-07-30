@@ -6,10 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Area;
 use App\Models\Genre;
 use App\Models\Shop;
-use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use App\Http\Requests\ReservationRequest;
+
 
 class ShopController extends Controller
 {
@@ -17,7 +16,7 @@ class ShopController extends Controller
         $shops = Shop::get()->sortBy('id');
         $shops = $shops->map(function ($shop) {
         $user_id = Auth::id();
-        $romanizedGenreName = $shop->genre->romaji_name; // ジャンル名を取得
+        $romanizedGenreName = $shop->genre->alphabet_name; // ジャンル名を取得
         $imageName = $romanizedGenreName . '.jpg';// ジャンル名を画像ファイル名として使用
         $imagePath = 'storage/' . $imageName; // 画像パス
         $shop->imagePath = $imagePath; // 画像パスを追加
@@ -38,7 +37,7 @@ class ShopController extends Controller
 
     public function showShopDetail($id){
         $shop = Shop::findOrFail($id);
-        $romanizedGenreName = $shop->genre->romaji_name; // ジャンル名を取得
+        $romanizedGenreName = $shop->genre->alphabet_name; // ジャンル名を取得
         $imageName = $romanizedGenreName . '.jpg';// ジャンル名を画像ファイル名として使用
         $imagePath = 'storage/' . $imageName; // 画像のパスを構築\
 
@@ -60,9 +59,7 @@ class ShopController extends Controller
         return view('shop_detail', compact('shop', 'imagePath','options', 'today', 'numbers'));
     }
 
-    public function reservationStore(ReservationRequest $request){
-        $reservation = $request->all();
-        Reservation::create($reservation);
-        return view('thanks');
+    public function showDone(){
+        return view('done');
     }
 }

@@ -16,7 +16,7 @@ public function toggleLike(Request $request)
 
     // 既にお気に入りに登録されているかチェック
     $already_liked = Like::where('user_id', $user_id)->where('shop_id', $shop_id)->exists();
-    
+
     if (!$already_liked) {
         // お気に入り登録がされていない場合は新しくレコードを作成
         $like = new Like;
@@ -35,4 +35,4 @@ public function toggleLike(Request $request)
     // お気に入り登録の状態を返す
     return response()->json(['liked' => $isLiked]);
 }
-    }
+}

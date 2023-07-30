@@ -15,8 +15,8 @@
 </header>
 
 <div class="text__content">
-    <p>会員登録ありがとうございます</p>
-    <div class="return__button"><a href="/">ログインする</a></div>
+    <p>ご予約ありがとうございます</p>
+    <div class="return__button"><a href="javascript:history.back()">戻る</a></div>
 </div>
 
 @endsection

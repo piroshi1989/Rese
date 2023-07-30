@@ -14,7 +14,7 @@
     <nav>
         <ul class="menu-nav">
             <li class="menu-nav__item">
-                <a class="menu-nav__link" href="/shop_all">Home</a>
+                <a class="menu-nav__link" href="/">Home</a>
             </li>
             @if (Auth::guest())
             <li class="menu-nav__item">

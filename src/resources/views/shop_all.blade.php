@@ -45,7 +45,7 @@
             <a class="shop__genre">#{{ $shop->genre->name }}</a>
             <div class="shop__bottom">
                 <div class="shop__detail__button">
-                    <a href="{{ asset('shop_all' . '/'. $shop['id']) }}">詳しくみる</a>
+                    <a href="{{ asset('/detail/'. $shop['id']) }}">詳しくみる</a>
                 </div>
                 @auth
                     <span class="likes">
@@ -76,7 +76,7 @@
             <a class="shop__genre">#{{ $shop->genre->name }}</a>
             <div class="shop__bottom">
                 <div class="shop__detail__button">
-                    <a href="{{ asset('shop_all' . '/'. $shop['id']) }}">詳しくみる</a>
+                    <a href="{{ asset('/detail/'. $shop['id']) }}">詳しくみる</a>
                 </div>
                 @auth
                     <span class="likes">

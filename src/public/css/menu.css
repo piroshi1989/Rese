@@ -42,3 +42,7 @@ body{
     border-radius: 3px;
     box-shadow: 2px 2px 2px gray;
 }
+
+a:hover {
+    text-decoration: none;
+}

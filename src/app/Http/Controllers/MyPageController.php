@@ -17,7 +17,7 @@ class MyPageController extends Controller
 
         $today = Carbon::now()->format('Y-m-d');
         $now = Carbon::now()->format('H:i');
-        
+
         $reservations = Reservation::where('user_id', $user_id)
         ->where(function ($query) use ($today, $now) {
             $query->where('date', '>', $today)
@@ -33,7 +33,7 @@ class MyPageController extends Controller
         $likedShops = Shop::whereIn('id', $likedShopIds)->get();
         // Shop モデルから $likedShopIds に含まれる shop_id に対応する店舗を取得
         $likedShops = $likedShops->map(function ($likedShop) {
-        $romanizedGenreName = $likedShop->genre->romaji_name; // ローマ字のジャンル名を取得
+        $romanizedGenreName = $likedShop->genre->alphabet_name; // ローマ字のジャンル名を取得
         $imageName = $romanizedGenreName . '.jpg';// ジャンル名を画像ファイル名として使用
         $imagePath = 'storage/' . $imageName; // 画像パス
         $likedShop->imagePath = $imagePath; // 画像パスを追加
@@ -41,11 +41,19 @@ class MyPageController extends Controller
         return $likedShop;
         });
 
-        return view('mypage', compact('reservations', 'user_name', 'today', 'now', 'likedShops'));
-    }
+        $startTime = Carbon::parse('11:30');
 
-    public function reservationDestroy(Request $request){
-        Reservation::find($request->id)->delete();
-        return redirect('/mypage')->with('message', '予定を削除しました');
+        while ($startTime <= Carbon::parse('22:00')) {
+            $options[$startTime->format('H:i')]= $startTime->format('H:i');
+            $startTime->addMinutes(30);
+        }
+        //予約可能時間を11:30から22:00として、30分毎に時間を生成。$optionsに格納
+
+        for($number=1;$number<=10;$number++){
+            $numbers[] = $number;
+        }
+        //予約人数を1～10人までとして$numbersに格納
+
+        return view('mypage', compact('reservations', 'user_name', 'today', 'now', 'likedShops', 'options', 'numbers'));
     }
 }

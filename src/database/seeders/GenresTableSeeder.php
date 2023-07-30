@@ -16,27 +16,27 @@ class GenresTableSeeder extends Seeder
     {
       DB::table('genres')->insert([
         'name' => 'イタリアン',
-        'romaji_name' => 'italian',
+        'alphabet_name' => 'italian',
         ]);
 
       DB::table('genres')->insert([
         'name' => 'ラーメン',
-        'romaji_name' => 'ramen',
+        'alphabet_name' => 'ramen',
         ]);
 
       DB::table('genres')->insert([
         'name' => '居酒屋',
-        'romaji_name' => 'izakaya',
+        'alphabet_name' => 'izakaya',
         ]);
 
         DB::table('genres')->insert([
         'name' => '寿司',
-        'romaji_name' => 'sushi',
+        'alphabet_name' => 'sushi',
         ]);
 
         DB::table('genres')->insert([
         'name' => '焼肉',
-        'romaji_name' => 'yakiniku',
+        'alphabet_name' => 'yakiniku',
         ]);
     }
 }

@@ -19,8 +19,8 @@ class SearchShopsController extends Controller
 
         $searchedShops = $searchedShops->map(function ($shop) {
         $user_id = Auth::id();
-        $romanizedGenreName = $shop->genre->romaji_name; // ジャンル名を取得
-        $imageName = $romanizedGenreName . '.jpg';// ジャンル名を画像ファイル名として使用
+        $alphabetGenreName = $shop->genre->alphabet_name; // ジャンル名を取得
+        $imageName = $alphabetGenreName . '.jpg';// ジャンル名を画像ファイル名として使用
         $imagePath = 'storage/' . $imageName; // 画像パス
         $shop->imagePath = $imagePath; // 画像パスを追加
 

@@ -16,6 +16,11 @@
 
 <main class="mypage">
     <h2 class="user__name">{{ $user_name }}さん</h2>
+    @if (session('message'))
+    <div class="reservation__alert">
+        {{session('message')}}
+    </div>
+    @endif
     <div class="mypage__content">
         <div class= "left__reservations__content">
             <div class="reservation__content">
@@ -33,36 +38,61 @@
                             </div>
                             <i class="bi bi-x-circle delete-form__button-submit" onclick="this.parentNode.submit()"></i>
                         </form>
-                        <table>
-                            <tr>
-                                <th class="reservation__th">Shop</th>
-                                <td class="reservation__td">{{ $reservation->shop->name }}</td>
-                            </tr>
-                            <tr>
-                                <th class="reservation__th">Date</th>
-                                <td class="reservation__td">{{ $reservation->date }}</td>
-                            </tr>
-                            <tr>
-                                <th class="reservation__th">Time</th>
-                                <td class="reservation__td">{{ $reservation->time }}</td>
-                            </tr>
-                            <tr>
-                                <th class="reservation__th">Number</th>
-                                <td class="reservation__td">{{ $reservation->number }}人</td>
-                            </tr>
-                        </table>
+                        <form action="/mypage/update" method="post" class= "reservation__form">
+                            @method('PATCH')
+                            @csrf
+                            <i class="bi bi-arrow-clockwise update-form__button-submit" onclick="this.parentNode.submit()"></i>
+                            <table>
+                                <tr>
+                                    <th class="reservation__th">Shop</th>
+                                    <td class="reservation__td">{{ $reservation->shop->name }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="reservation__th">Date</th>
+                                    <td class="reservation__td">
+                                        <input class="reservation__date" type="date" name="date" name="date" min="{{ $today }}" value="{{ $reservation->date }}"></td>
+                                </tr>
+                                <tr>
+                                    <th class="reservation__th">Time</th>
+                                    <td class="reservation__td">
+                                        <select name="time" class="reservation__time" value="{{ $reservation->time }}">
+                                            @foreach($options as $option)
+                                            <option class="reservation__time__option" value="{{ $option }}"
+                                                @if ($reservation->time === $option)
+                                                    selected
+                                                @endif >
+                                            {{ $option }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="reservation__th">Number</th>
+                                    <td class="reservation__td">
+                                        <select name="number" class="reservation__number" value="{{ $reservation->number }}人">
+                                            @foreach($numbers as $number)
+                                            <option class="reservation__number__option" value="{{ $number}}"
+                                                @if ($reservation->number === $number)
+                                                    selected
+                                                @endif >
+                                            {{ $number. '人' }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                </tr>
+                                <input type="hidden" name="id" value="{{ $reservation['id'] }}">
+                                {{--  <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                <input type="hidden" name="shop_id" value="{{ $reservation->shop->id }}">--}}
+                            </table>
                         </form>
                     </div>
                 @endforeach
                 @endif
                 {{ $reservations->links() }}
-                @if (session('message'))
-                <div class="reservation__alert">
-                {{session('message')}}
-                </div>
-                @endif
-            </div>
         </div>
+    </div>
 
         <div class = "right__liked__content">
             <h3 class="mypage__title">お気に入り店舗</h3>
@@ -79,7 +109,7 @@
                         <a class="shop__genre">#{{ $likedShop->genre->name }}</a>
                         <div class="shop__bottom">
                             <div class="shop__detail__button">
-                                <a href="{{ asset('shop_all' . '/'. $likedShop['id']) }}">詳しくみる</a>
+                                <a href="{{ asset('/detail/'. $likedShop['id']) }}">詳しくみる</a>
                             </div>
                             <span class="likes">
                                 <i class="bi bi-heart-fill"></i>
