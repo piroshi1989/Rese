@@ -36,7 +36,7 @@
     @if(Auth::check())
     <div class = "right__content__reservation">
         <h2 class="reservation__content__title">予約</h2>
-        <form action="{{ 'shop_detail' }}" method="post">
+        <form action="/done" method="post">
             @csrf
             <div class="reservation__input__field">
             <input class="reservation__date" type="date" name="date" name="date" min="{{ $today }}" >

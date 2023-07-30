@@ -19,7 +19,7 @@ class MyPageController extends Controller
         $today = Carbon::now()->format('Y-m-d');
 
         $now = Carbon::now()->format('H:i');
-        
+
         $reservations = Reservation::where('user_id', $user_id)
         ->where('date', '>=', $today)
         ->where('time', '>=', $now)
@@ -28,10 +28,18 @@ class MyPageController extends Controller
 
 
         return view('mypage', compact('reservations', 'user_name', 'today', 'now'));
-    }
 
-    public function reservationDestroy(Request $request){
-        Reservation::find($request->id)->delete();
-        return redirect('/mypage')->with('message', '予定を削除しました');
+        while ($startTime <= Carbon::parse('22:00')) {
+            $options[$startTime->format('H:i')]= $startTime->format('H:i');
+            $startTime->addMinutes(30);
+        }
+        //予約可能時間を11:30から22:00として、30分毎に時間を生成。$optionsに格納
+
+        for($number=1;$number<=10;$number++){
+            $numbers[] = $number;
+        }
+        //予約人数を1～10人までとして$numbersに格納
+
+        return view('mypage', compact('reservations', 'user_name', 'today', 'now', 'likedShops', 'options', 'numbers'));
     }
 }

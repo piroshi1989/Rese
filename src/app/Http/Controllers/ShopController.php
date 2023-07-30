@@ -10,7 +10,7 @@ use App\Models\Genre;
 use App\Models\Favorite;
 use App\Models\Reservation;
 use Carbon\Carbon;
-use App\Http\Requests\ReservationRequest;
+
 
 class ShopController extends Controller
 {
@@ -18,8 +18,9 @@ class ShopController extends Controller
         $shops = Shop::with('area', 'genre')->get()->sortBy('id');
         
         $shops = $shops->map(function ($shop) {
-        $genreName = $shop->genre->name; // ジャンル名を取得
-        $romanizedGenreName = str_replace(['焼肉', '寿司', 'ラーメン', 'イタリアン', '居酒屋'], ['yakiniku', 'sushi', 'ramen', 'italian', 'izakaya'], $genreName);        $imageName = $romanizedGenreName . '.jpg';// ジャンル名を画像ファイル名として使用
+        $user_id = Auth::id();
+        $romanizedGenreName = $shop->genre->romaji_name; // ジャンル名を取得
+        $imageName = $romanizedGenreName . '.jpg';// ジャンル名を画像ファイル名として使用
         $imagePath = 'storage/' . $imageName; // 画像パス
         $shop->imagePath = $imagePath; // 画像パスを追加
         return $shop;
@@ -64,9 +65,8 @@ public function index(Request $request)
 
     public function shopDetailView($id){
         $shop = Shop::findOrFail($id);
-        $genreName = $shop->genre->name; // ジャンル名を取得
-        $romanizedGenreName = str_replace(['焼肉', '寿司', 'ラーメン', 'イタリアン', '居酒屋'], ['yakiniku', 'sushi', 'ramen', 'italian', 'izakaya'], $genreName);
-        $imageName = $romanizedGenreName . '.jpg'; // ジャンル名を画像ファイル名として使用
+        $romanizedGenreName = $shop->genre->romaji_name; // ジャンル名を取得
+        $imageName = $romanizedGenreName . '.jpg';// ジャンル名を画像ファイル名として使用
         $imagePath = 'storage/' . $imageName; // 画像のパスを構築\
 
         $today = Carbon::now()->format('Y-m-d');
@@ -88,8 +88,8 @@ public function index(Request $request)
     }
 
     public function reservationStore(ReservationRequest $request){
-        $form = $request->all();
-        Reservation::save($form);
+        $reservation = $request->all();
+        Reservation::create($reservation);
         return view('thanks');
     }
 }
