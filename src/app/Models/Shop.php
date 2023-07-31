@@ -21,17 +21,37 @@ class Shop extends Model
         return $this->belongsTo(Area::class);
     }
 
-    public function reservation()
+    public function reservations()
     {
     return $this->hasMany(Reservation::class);
     }
 
-    public function favorite()
+    public function likes()
     {
-    return $this->hasMany(Favorite::class);
+    return $this->hasMany(Like::class);
     }
 
-    public function isLikedBy($user): bool {
-        return Favorite::where('user_id', $user->id)->where('shop_id', $this->id)->first() !==null;
+    //後でViewで使う、いいねされているかを判定するメソッド。
+    public function isLikedBy($user_id): bool
+    {
+    // この店舗をお気に入り登録しているかを判定
+    return $this->likes->contains('user_id', $user_id);
+    }
+
+        public function scopeShopsSearch($query, $area_id=null, $genre_id=null,  $keyword=null)
+    {
+        if($area_id){
+            $query->where('area_id', $area_id);
+        }
+
+        if($genre_id){
+            $query->where('genre_id', $genre_id);
+        }
+
+        if($keyword){
+            $query->where('name','like', '%' . $keyword . '%');
+        }
+
+        return $query;
     }
 }

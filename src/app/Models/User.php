@@ -47,9 +47,9 @@ class User extends Authenticatable
         return $this->belongsTo(Genre::class);
     }
 
-    public function favorite()
+    public function like()
     {
-    return $this->hasMany(Favorite::class);
+    return $this->hasMany(Like::class);
     }
 
     public function reservation()

@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class FavoritesTableSeeder extends Seeder
+class likesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,32 +14,32 @@ class FavoritesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('favorites')->insert([
+        DB::table('likes')->insert([
         'user_id' => 1,
         'shop_id' => 1,
         ]);
 
-        DB::table('favorites')->insert([
+        DB::table('likes')->insert([
         'user_id' => 1,
         'shop_id' => 2,
         ]);
 
-        DB::table('favorites')->insert([
+        DB::table('likes')->insert([
         'user_id' => 1,
         'shop_id' => 3,
         ]);
 
-        DB::table('favorites')->insert([
+        DB::table('likes')->insert([
         'user_id' => 1,
         'shop_id' => 4,
         ]);
 
-        DB::table('favorites')->insert([
+        DB::table('likes')->insert([
         'user_id' => 1,
         'shop_id' => 5,
         ]);
 
-        DB::table('favorites')->insert([
+        DB::table('likes')->insert([
         'user_id' => 1,
         'shop_id' => 6,
         ]);

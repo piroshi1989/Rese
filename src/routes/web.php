@@ -20,14 +20,19 @@ use App\Http\Controllers\SearchShopsController;
 */
 
 Route::get('/menu', [MenuController::class, 'showMenu']);
+//Route::get('/login', [AuthController::class, 'showLogin']);
+Route::get('/thanks', [AuthController::class, 'showThanks']);
 Route::get('/', [ShopController::class, 'showShop']);
 Route::get('/search', [SearchShopsController::class, 'searchShops']);
 Route::get('/detail/{id}', [ShopController::class, 'showShopDetail']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/mypage', [MyPageController::class, 'showMyPage']);
-    Route::post('/detail/{id}', [ShopController::class, 'ReservationStore']);
-    Route::delete('/mypage/delete', [MyPageController::class, 'reservationDestroy']);
+    Route::post('/done', [ShopController::class, 'showDone']);
+    Route::post('/detail/{id}', [ReservationController::class, 'ReservationStore']);
+    Route::delete('/mypage/delete',
+    [ReservationController::class, 'reservationDestroy']);
+    Route::patch('/mypage/update', [ReservationController::class, 'reservationUpdate']);
     Route::post('/like',[LikeController::class,'toggleLike']);
     Route::delete('/like/{likeId}', [LikeController::class, 'toggleLike']);
     });
