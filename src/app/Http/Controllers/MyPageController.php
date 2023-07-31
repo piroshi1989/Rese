@@ -12,7 +12,7 @@ use Carbon\Carbon;
 
 class MyPageController extends Controller
 {
-    public function myPageView(){
+    public function showMyPage(){
         $user_id = Auth::id();
         $user_name = Auth::user()->name;
 

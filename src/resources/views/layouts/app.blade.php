@@ -14,6 +14,6 @@
 </head>
 <body>
     @yield('content')
-    @stack('scripts')
+    @yield('scripts')
 </body>
 </html>

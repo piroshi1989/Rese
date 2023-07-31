@@ -1,26 +1,31 @@
 @extends('layouts.app')
-
+@section('csrf-token')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/shop_all.css') }}">
+<link rel="stylesheet" href="{{ asset('css/shop_all.css') }}">
 @endsection
 
 @section('content')
 <header class="header">
     <div class="header__inner">
         <div class="header-utilities">
-        <a class="icon-link rese" href="/menu">
+            <a class="icon-link rese" href="/menu">
             <i class="bi bi-list" id="menu__icon" aria-hidden="true"></i>Rese</a>
         </div>
         <div class="search__form">
             <form action="/search" method="get">
+                @csrf
                 <select name="area" class="area">
+                    <option value="">都道府県を選択</option>
                     @foreach($areas as $area)
                     <option value={{ $area['id'] }}>{{ $area['name'] }}</option>
-                    @endforeach
+                @endforeach
                 </select><select name="genre">
+                    <option value="">ジャンルを選択</option>
                     @foreach($genres as $genre)
                     <option value={{ $genre['id'] }}>{{ $genre['name'] }}</option>
-                    @endforeach
+                @endforeach
                 </select><input type="text" class="" name="keyword" placeholder="Search..."><button type="submit" class="search__icon"><i class="bi bi-search"></i></button>
             </form>
         </div>
@@ -28,6 +33,7 @@
 </header>
 
 <main class="shop__main">
+    @if(empty($searchedShops))
     @foreach($shops as $shop)
     <div class="shop__content">
         <div class="shop__photo">
@@ -89,10 +95,10 @@
         </div>
     </div>
     @endforeach
+    @endif
 </main>
-
 @endsection
-
-@push('scripts')
-    <script src="{{ asset('js/favorite.js') }}" defer></script>
-@endpush
+@section('scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{ asset('js/ajaxlike.js') }}"></script>
+@endsection
