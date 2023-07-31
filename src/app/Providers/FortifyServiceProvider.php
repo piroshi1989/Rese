@@ -14,6 +14,7 @@ use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
 use App\Http\Requests\CreateUserRequest;
 use Laravel\Fortify\Contracts\LogoutResponse;
+use Laravel\Fortify\Contracts\LoginResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,14 @@ class FortifyServiceProvider extends ServiceProvider
             return redirect('/login');
         }
     });
+
+        $this->app->instance(LoginResponse::class, new class implements LoginResponse {
+        public function toResponse($request)
+        {
+            return redirect('/');
+        }
+    });
+
     }
 
     /**
