@@ -54,7 +54,7 @@
                 </option>
                 @endforeach
             </select>
-            
+
     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
     <input type="hidden" name="shop_id" value="{{ $shop['id'] }}">
             </div>

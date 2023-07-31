@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Shop;
 use App\Models\Area;
 use App\Models\Genre;
-use App\Models\Favorite;
+use App\Models\Like;
 use App\Models\Reservation;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -54,5 +54,9 @@ class ShopController extends Controller
         //予約人数を1～10人までとして$numbersに格納
 
         return view('shop_detail', compact('shop', 'imagePath','options', 'today', 'numbers'));
+    }
+
+    public function showDone(){
+        return view('done');
     }
 }

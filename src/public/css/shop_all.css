@@ -3,18 +3,18 @@ form {
 }
 
 .search__icon {
-        position: absolute;
-        left: 93%;
-        top: 0;
-        background: none;
-        color: #666;
-        border: none;
-        font-size: 20px;
-        /*アイコンサイズ*/
-    }
+    position: absolute;
+    left: 93%;
+    top: 0;
+    background: none;
+    color: #666;
+    border: none;
+    font-size: 20px;
+    /*アイコンサイズ*/
+}
 
-.header__inner{
-    display:flex;
+.header__inner {
+    display: flex;
     justify-content: space-between;
     align-items: center;
 }
@@ -29,20 +29,20 @@ select {
     background-color: #fff;
 }
 
-input{
+input {
     border: none;
     border-radius: 0 3px 3px 0;
-    width:50%;
+    width: 50%;
 }
 
-.search__form{
-    height:30%;
+.search__form {
+    height: 30%;
     background-color: #fff;
     border-radius: 3px;
-    margin:20px;
+    margin: 20px;
     box-shadow: 3px 3px 3px gray;
     white-space: nowrap;
-    width:50%;
+    width: 50%;
 }
 
 .header-utilities {
@@ -52,36 +52,36 @@ input{
     outline: none;
 }
 
-.shop__main{
-    padding:10px;
+.shop__main {
+    padding: 10px;
     display: flex;
     flex-wrap: wrap;
-    width:100%;
+    width: 100%;
     justify-content: center;
 }
 
-.shop__content{
+.shop__content {
     background-color: #fff;
     border-radius: 3px;
     box-shadow: 5px 5px 5px gray;
-    width:22%;
-    margin:10px;
-    padding-bottom:5px;
+    width: 22%;
+    margin: 10px;
+    padding-bottom: 5px;
 }
 
-.shop__photo img{
-    width:100%;
+.shop__photo img {
+    width: 100%;
     border-radius: 3px 3px 0 0;
 }
 
-.shop__info{
-    padding:20px;
+.shop__info {
+    padding: 20px;
 }
 .shop__detail__button {
     text-decoration: none;
     font-size: 12px;
     width: 30%;
-    background-color: #3560F6;
+    background-color: #3560f6;
     border-radius: 3px;
     padding: 5px;
     text-align: center;
@@ -91,26 +91,27 @@ input{
     color: #fff;
 }
 
-.shop__title{
+.shop__title {
     font-size: 24px;
     font-weight: bold;
 }
 
-.shop__area ,.shop__genre{
+.shop__area,
+.shop__genre {
     font-size: 12px;
 }
 
-#favorite__icon{
-    margin:10px;
+#like__icon {
+    margin: 10px;
     font-size: 24px;
 }
 
-.shop__bottom{
-    display:flex;
+.shop__bottom {
+    display: flex;
     justify-content: space-between;
-    margin-top:20px;
+    margin-top: 20px;
 }
 
 .liked {
-    color: pink;
+    color:red;
 }

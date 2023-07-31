@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/mypage.css') }}">
+<link rel="stylesheet" href="{{ asset('css/mypage.css') }}">
 @endsection
 
 @section('content')
 <header class="header">
     <div class="header__inner">
         <div class="header-utilities">
-        <a class="icon-link rese" href="/menu">
-            <i class="bi bi-list" id="menu__icon" aria-hidden="true"></i>Rese</a>
+            <a class="icon-link rese" href="/menu">
+                <i class="bi bi-list" id="menu__icon" aria-hidden="true"></i>Rese</a>
         </div>
     </div>
 </header>
@@ -121,22 +121,6 @@
             @endif
             </div>
         </div>
-@endforeach
-{{ $reservations->links() }}
-@endif
- @if (session('message'))
-    </div class="reservation__alert">
-   {{session('message')}}
     </div>
-    @endif
-    </div>
-    </div>
-
-    <div class = "right__favorites__content">
-        <h3 class="user__name">{{ $user_name }}さん</h3>
-
-    </div>
-
-    </main>
-
+</main>
 @endsection
