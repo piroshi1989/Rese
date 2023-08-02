@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Models\Shop;
 use App\Models\Area;
 use App\Models\Genre;
-use App\Models\Like;
 use App\Models\Reservation;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -16,13 +15,14 @@ class ShopController extends Controller
 {
     public function showShop(){
         $shops = Shop::with('area', 'genre')->get()->sortBy('id');
-        
+
         $shops = $shops->map(function ($shop) {
         $user_id = Auth::id();
         $alphabetGenreName = $shop->genre->alphabet_name; // ジャンル名を取得
         $imageName = $alphabetGenreName . '.jpg';// ジャンル名を画像ファイル名として使用
         $imagePath = 'storage/' . $imageName; // 画像パス
         $shop->imagePath = $imagePath; // 画像パスを追加
+
         return $shop;
         });
 
@@ -39,6 +39,7 @@ class ShopController extends Controller
         $imagePath = 'storage/' . $imageName; // 画像のパスを構築\
 
         $today = Carbon::now()->format('Y-m-d');
+        $now = Carbon::now()->format('H:i');
 
         $startTime = Carbon::parse('11:30');
 
@@ -53,10 +54,14 @@ class ShopController extends Controller
         }
         //予約人数を1～10人までとして$numbersに格納
 
-        return view('shop_detail', compact('shop', 'imagePath','options', 'today', 'numbers'));
-    }
+        $reservations = Reservation::where('shop_id', $shop->id)
+        ->where(function ($query) use ($today, $now) {
+            $query->where('date', '<', $today)
+        ->orWhere(function ($query) use ($today, $now) {
+            $query->where('date', '=', $today)->where('time', '<=', $now);
+        });
+        })->get();
 
-    public function showDone(){
-        return view('done');
+        return view('shop_detail', compact('shop', 'imagePath','options', 'today', 'numbers','reservations' ));
     }
 }

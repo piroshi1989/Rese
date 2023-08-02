@@ -30,6 +30,8 @@
         "jquery": "^3.7.0",
         "loaderjs": "^1.0.0",
         "postcss-loader": "^7.3.3",
-        "url-loader": "^4.1.1"
+        "url-loader": "^4.1.1",
+        "vue": "^3.3.4",
+        "vue-star-rating": "^1.7.0"
     }
 }

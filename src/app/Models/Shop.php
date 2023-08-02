@@ -54,4 +54,9 @@ class Shop extends Model
 
         return $query;
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(ShopReview::class, 'shop_id', 'id');
+    }
 }
