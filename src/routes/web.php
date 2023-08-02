@@ -8,6 +8,7 @@ use App\Http\Controllers\MyPageController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\SearchShopsController;
+use App\Http\Controllers\ReviewController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,16 +23,16 @@ use App\Http\Controllers\SearchShopsController;
 Route::get('/menu', [MenuController::class, 'showMenu']);
 Route::get('/', [ShopController::class, 'showShop']);
 Route::get('/search', [SearchShopsController::class, 'searchShops']);
-Route::get('/detail/{id}', [ShopController::class, 'showShopDetail']);
+Route::get('/detail/{id}', [ShopController::class, 'showShopDetail'])->name('shop_detail');
 
 Route::middleware('auth')->group(function () {
     Route::get('/mypage', [MyPageController::class, 'showMyPage']);
     Route::get('/thanks', [AuthController::class, 'showThanks']);
-    Route::post('/done', [ShopController::class, 'showDone']);
     Route::post('/detail/{id}', [ReservationController::class, 'ReservationStore']);
     Route::delete('/mypage/delete',
     [ReservationController::class, 'reservationDestroy']);
     Route::patch('/mypage/update', [ReservationController::class, 'reservationUpdate']);
     Route::post('/like',[LikeController::class,'toggleLike']);
     Route::delete('/like/{likeId}', [LikeController::class, 'toggleLike']);
+    Route::post('/review', [ReviewController::class, 'reviewStore']);
     });

@@ -101,10 +101,19 @@ input {
     font-size: 12px;
 }
 
-#like__icon {
+.likes {
     margin: 10px;
     font-size: 24px;
+    cursor: pointer;
+    color:gainsboro;
 }
+
+.likes__guest {
+    margin: 10px;
+    font-size: 24px;
+    color: gainsboro;
+}
+
 
 .shop__bottom {
     display: flex;

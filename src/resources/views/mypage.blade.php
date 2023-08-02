@@ -83,10 +83,14 @@
                                     </td>
                                 </tr>
                                 <input type="hidden" name="id" value="{{ $reservation['id'] }}">
-                                {{--  <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                                <input type="hidden" name="shop_id" value="{{ $reservation->shop->id }}">--}}
                             </table>
                         </form>
+                        <div class="form__error">
+                            @error('time')
+                            <p>ERROR</p>
+                            <p class="error">{{ $message }}</p>
+                            @enderror
+                        </div>
                     </div>
                 @endforeach
                 @endif

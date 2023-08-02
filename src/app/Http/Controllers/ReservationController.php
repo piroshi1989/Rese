@@ -9,14 +9,19 @@ use App\Http\Requests\ReservationRequest;
 class ReservationController extends Controller
 {
     public function reservationStore(ReservationRequest $request){
+        $formType = $request->input('form_type');
+        if ($formType === 'reservation_form') {
+        // 予約フォームからの送信の場合の処理
         $reservation = $request->all();
         Reservation::create($reservation);
+
         return view('done');
+        }
     }
 
     public function reservationDestroy(Request $request){
         Reservation::find($request->id)->delete();
-        return redirect('/mypage')->with('message', '予定を削除しました');
+        return redirect('/mypage')->with('message', '予約を削除しました');
     }
 
     public function reservationUpdate(ReservationRequest $request){

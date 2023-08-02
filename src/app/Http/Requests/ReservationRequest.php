@@ -25,9 +25,13 @@ class ReservationRequest extends FormRequest
     public function rules()
     {
         $today = Carbon::today();
+        $formType = $this->input('form_type');
 
         $rules = [
-            'time' => 'required',
+            // 予約フォームの場合のみバリデーションを適用
+            'date' => $formType === 'reservation_form' ? 'required' : '',
+            'time' => $formType === 'reservation_form' ? 'required' : '',
+            'number' => $formType === 'reservation_form' ? 'required' : '',
             // 他のフォームフィールドのバリデーションルールをここに追加
         ];
 
@@ -41,8 +45,10 @@ class ReservationRequest extends FormRequest
     public function messages()
     {
         return [
+            'date.required' => '日付を入力してください',
             'time.after_or_equal' => '予約可能時間が過ぎています。',
-            // 他のバリデーションエラーメッセージをここに追加
+            'time.required' => '予約時間を入力してください',
+            'number.required' => '予約人数を入力してください'
         ];
     }
 }
