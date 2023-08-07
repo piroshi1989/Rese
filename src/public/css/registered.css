@@ -1,0 +1,31 @@
+.text__content {
+    border-radius: 5px;
+    background-color: #fff;
+    width: 50%;
+    margin: auto;
+    margin-top: 100px;
+    box-shadow: 5px 5px 5px gray;
+    padding:50px;
+    text-align: center;
+}
+
+.text__content p{
+    margin:40px;
+    font-size:20px;
+    font-weight: bold;
+}
+
+.return__button {
+    text-decoration: none;
+    font-size: 14px;
+    width:50%;
+    background-color: #3560F6;
+    border-radius: 3px;
+    padding:5px 10px;
+    margin:0 auto;
+    margin-bottom: 50px;
+}
+
+.return__button a{
+    color:#fff;
+}

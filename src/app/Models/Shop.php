@@ -31,6 +31,11 @@ class Shop extends Model
     return $this->hasMany(Like::class);
     }
 
+    public function user()
+    {
+    return $this->hasOne(User::class);
+    }
+
     //後でViewで使う、いいねされているかを判定するメソッド。
     public function isLikedBy($user_id): bool
     {
@@ -38,7 +43,8 @@ class Shop extends Model
     return $this->likes->contains('user_id', $user_id);
     }
 
-        public function scopeShopsSearch($query, $area_id=null, $genre_id=null,  $keyword=null)
+    //検索用
+    public function scopeShopsSearch($query, $area_id=null, $genre_id=null,  $keyword=null)
     {
         if($area_id){
             $query->where('area_id', $area_id);

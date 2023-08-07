@@ -36,3 +36,17 @@ body{
     color: red;
     margin: 0 10px;
 }
+
+.admin{
+    font-weight: bold;
+    margin:20px;
+    font-size:30px;
+    color:#3560F6;
+}
+
+.alert {
+    padding: 10px 30px;
+    border-color: #badbcc;
+    background-color: #d1e7dd;
+    color: #0f5132;
+}

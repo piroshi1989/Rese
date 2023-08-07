@@ -13,10 +13,17 @@
         </div>
     </div>
 </header>
-
+@can('superadmin')
+<div class="text__content">
+    <p>店舗管理者を登録できました</p>
+    <div class="return__button"><a href="/">ログインする</a></div>
+</div>
+@endcan
+@can('user')
 <div class="text__content">
     <p>会員登録ありがとうございます</p>
     <div class="return__button"><a href="/">ログインする</a></div>
 </div>
+@endcan
 
 @endsection

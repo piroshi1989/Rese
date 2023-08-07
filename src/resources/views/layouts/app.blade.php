@@ -13,6 +13,12 @@
     @yield('css')
 </head>
 <body>
+    @can('superadmin')
+    <p class= "admin">管理者でログイン中</p>
+    @endcan
+    @can('only_admin')
+    <p class= "admin">店舗代表者でログイン中</p>
+    @endcan
     @yield('content')
     @yield('scripts')
 </body>

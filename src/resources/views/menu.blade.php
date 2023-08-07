@@ -20,6 +20,7 @@
             @if (Auth::guest())
             <li class="menu-nav__item">
                 <a class="menu-nav__link" href="/register">Registration</a>
+            </li>
             <li class="menu-nav__item">
                 <a class="menu-nav__link" href="/login">Login</a>
             </li>
@@ -31,9 +32,21 @@
                     <button class="menu-nav__button" type="submit">Logout</button>
                 </form>
             </li>
+            @can('superadmin')
+            <li class="menu-nav__item">
+                <a class="menu-nav__link" href="/admin/register">AdminRegistration</a>
+            </li>
+            @endcan
+            @can('only_admin')
+            <li class="menu-nav__item">
+                <a class="menu-nav__link" href="/management">Management</a>
+            </li>
+            @endcan
+            @can('user')
             <li class="menu-nav__item">
                 <a class="menu-nav__link" href="/mypage">Mypage</a>
             </li>
+            @endcan
             @endif
         </ul>
     </nav>

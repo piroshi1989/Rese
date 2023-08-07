@@ -1,0 +1,35 @@
+.reservation__content {
+    margin: 0 auto;
+    padding: 30px 15px;
+    max-width: 1230px;
+}
+
+.reservation-table {
+    margin: 30px auto;
+    width: 70%;
+    text-align: center;
+}
+
+.reservation-table__inner {
+    width: 100%;
+}
+
+.reservation-table__row {
+    border-bottom: 1px solid #ddd;
+}
+
+.todo-table__header {
+    padding: 12px;
+    width: 20%;
+    text-align: left;
+    font-weight: bold;
+}
+
+.todo-table__header-span {
+    margin-right: 40%;
+}
+
+.todo-table__item:first-of-type {
+    padding: 12px;
+    width: 90%;
+}

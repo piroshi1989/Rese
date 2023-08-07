@@ -14,7 +14,7 @@
             </div>
         </div>
          @if (session('message'))
-    <div class="reservation__alert">
+    <div class="alert">
         {{session('message')}}
     </div>
     @endif
@@ -35,7 +35,7 @@
                     <p>{{ $shop['detail'] }}</p>
                 </div>
             </div>
-            @auth
+            @can('user')
             @if ($reservations->isNotEmpty())
             <div class="star-rating">
                 <form action="/review"  method='post'>
@@ -66,11 +66,12 @@
                     @enderror
                 </div>
             </div>
-            @endauth
+            @endcan
             @endif
         </div>
     </div>
     @if(Auth::check())
+    @can('user')
     <div class = "right__content__reservation">
         <h2 class="reservation__content__title">予約</h2>
         <form action="{{ 'shop_detail' }}" method="post">
@@ -138,6 +139,7 @@
         </form>
     </div>
     @else
+    @can('user')
         <h2 class="arart__message">予約される方はログインしてください</h2>
     @endif
 </main>
