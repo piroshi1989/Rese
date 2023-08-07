@@ -17,7 +17,7 @@
 <main class="mypage">
     <h2 class="user__name">{{ $user_name }}さん</h2>
     @if (session('message'))
-    <div class="reservation__alert">
+    <div class="alert">
         {{session('message')}}
     </div>
     @endif

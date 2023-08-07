@@ -24,6 +24,7 @@ class CreateNewUser implements CreatesNewUsers
         app(UserRequest::class)->validated();
 
         return User::create([
+            'role' => 0,
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),

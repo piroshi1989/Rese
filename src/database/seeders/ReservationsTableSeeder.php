@@ -18,7 +18,7 @@ class ReservationsTableSeeder extends Seeder
         'user_id' => 1,
         'shop_id' => 1,
         'date' => '2021-04-01',
-        'time' => '18:00:00',
+        'time' => '18:00',
         'number' => 2,
         ]);
 
@@ -26,7 +26,7 @@ class ReservationsTableSeeder extends Seeder
         'user_id' => 1,
         'shop_id' => 2,
         'date' => '2024-04-01',
-        'time' => '18:00:00',
+        'time' => '18:00',
         'number' => 2,
         ]);
 
@@ -34,7 +34,7 @@ class ReservationsTableSeeder extends Seeder
         'user_id' => 1,
         'shop_id' => 20,
         'date' => '2025-04-01',
-        'time' => '18:00:00',
+        'time' => '18:00',
         'number' => 2,
         ]);
 
@@ -42,7 +42,7 @@ class ReservationsTableSeeder extends Seeder
         'user_id' => 1,
         'shop_id' => 1,
         'date' => '2020-04-01',
-        'time' => '18:00:00',
+        'time' => '18:00',
         'number' => 2,
         ]);
     }

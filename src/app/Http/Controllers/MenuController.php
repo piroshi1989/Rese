@@ -9,4 +9,8 @@ class MenuController extends Controller
     public function showMenu(){
         return view('menu');
     }
+
+    public function showManagementMenu(){
+        return view('management_menu');
+    }
 }

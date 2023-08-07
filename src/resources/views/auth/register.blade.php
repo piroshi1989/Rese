@@ -23,6 +23,7 @@
         <div class="form__group">
             <div class="form__group-content">
                 <i class="bi bi-person-fill"></i>
+                <input type="hidden" name="role" value="0">
                 <input type="text" name="name" class="name" placeholder="Username" value="{{ old('name') }}">
             </div>
             <div class="form__error">

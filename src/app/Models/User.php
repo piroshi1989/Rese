@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'shop_id',
     ];
 
     /**
@@ -56,4 +58,5 @@ class User extends Authenticatable
     {
     return $this->hasMany(Reservation::class);
     }
+
 }

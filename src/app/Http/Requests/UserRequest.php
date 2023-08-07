@@ -26,7 +26,7 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string' , 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255'],
+            'email' => ['required', 'string', 'email', 'unique:users','max:255'],
             'password' => ['required', Password::min(8)],
         ];
     }
@@ -34,15 +34,16 @@ class UserRequest extends FormRequest
     public function messages()
     {
         return [
-             'name.required' => '名前を入力してください',
-             'name.string' => '名前を文字列で入力してください',
-             'name.max' => '名前を255文字以下で入力してください',
-             'email.required' => 'メールアドレスを入力してください',
-             'email.string' => 'メールアドレスを文字列で入力してください',
-             'email.email' => '有効なメールアドレス形式を入力してください',
-             'email.max' => 'メールアドレスを255文字以下で入力してください',
-             'password.required' => 'パスワードで入力してください',
-             'password.min' => 'パスワードで8文字以上で入力してください',
+            'name.required' => '名前を入力してください',
+            'name.string' => '名前を文字列で入力してください',
+            'name.max' => '名前を255文字以下で入力してください',
+            'email.required' => 'メールアドレスを入力してください',
+            'email.string' => 'メールアドレスを文字列で入力してください',
+            'email.unique' => 'そのメールアドレスはすでに登録されています',
+            'email.email' => '有効なメールアドレス形式を入力してください',
+            'email.max' => 'メールアドレスを255文字以下で入力してください',
+            'password.required' => 'パスワードを入力してください',
+            'password.min' => 'パスワードで8文字以上で入力してください',
         ];
     }
 }
