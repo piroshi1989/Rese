@@ -3,14 +3,12 @@ $(document).ready(function() {
     const $this = $(this);
     const shopId = $this.data('shop-id');
     const userId = $this.data('user-id');
-    const likeId = $this.data('like-id');
-    const isLiked = likeId !== '';
 
     // ローカルストレージからお気に入りの状態を取得
     const localStorageKey = `like_${shopId}_${userId}`;
-    const storedLikeId = localStorage.getItem(localStorageKey);
+    const isLiked = localStorage.getItem(localStorageKey) === 'true';
 
-    if (storedLikeId !== null) {
+    if (isLiked) {
       $this.addClass('liked');
     }
 
@@ -18,7 +16,7 @@ $(document).ready(function() {
       // Ajaxリクエストを送信
       $.ajax({
         type: isLiked ? 'DELETE' : 'POST',
-        url: isLiked ? `/like/${likeId}` : '/like',
+        url: isLiked ? `/like/${shopId}` : '/like',
         data: {
           shop_id: shopId,
           user_id: userId,
@@ -28,12 +26,11 @@ $(document).ready(function() {
           // 成功時の処理
           if (data.liked) {
             $this.addClass('liked');
-            localStorage.setItem(localStorageKey, data.like_id); // ローカルストレージに保存
+            localStorage.setItem(localStorageKey, 'true'); // お気に入りの状態を保存
           } else {
             $this.removeClass('liked');
-            localStorage.removeItem(localStorageKey); // ローカルストレージから削除
+            localStorage.removeItem(localStorageKey); // お気に入りの状態を削除
           }
-          $this.data('like-id', data.liked ? data.like_id : '');
         },
         error: function(error) {
           // エラー時の処理

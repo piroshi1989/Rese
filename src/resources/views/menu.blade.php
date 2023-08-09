@@ -17,15 +17,15 @@
             <li class="menu-nav__item">
                 <a class="menu-nav__link" href="/">Home</a>
             </li>
-            @if (Auth::guest())
+            @guest
             <li class="menu-nav__item">
                 <a class="menu-nav__link" href="/register">Registration</a>
             </li>
             <li class="menu-nav__item">
                 <a class="menu-nav__link" href="/login">Login</a>
             </li>
-            @endif
-            @if(Auth::check())
+            @endguest
+            @auth
             <li class="menu-nav__item">
                 <form class="form" action="/logout" method="post">
                     @csrf
@@ -47,7 +47,7 @@
                 <a class="menu-nav__link" href="/mypage">Mypage</a>
             </li>
             @endcan
-            @endif
+            @endauth
         </ul>
     </nav>
 </div>

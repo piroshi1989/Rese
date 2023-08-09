@@ -34,16 +34,6 @@ class FortifyServiceProvider extends ServiceProvider
         public function toResponse($request)
         {
             return redirect('/');
-
-            //$user = Auth::user();
-
-            //if($user->role === 0){
-            //return redirect('/');
-            //}elseif($user->role === 1){
-            //return redirect('/admin');
-            //}elseif($user->role === 2){
-            //return redirect('/super_admin');
-            //}
         }
     });
 
@@ -81,6 +71,10 @@ class FortifyServiceProvider extends ServiceProvider
             $email = (string) $request->email;
 
             return Limit::perMinute(10)->by($email . $request->ip());
+        });
+
+        Fortify::verifyEmailView(function () {
+            return view('auth.verify-email');
         });
     }
 }

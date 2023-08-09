@@ -10,15 +10,19 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Shop;
 use App\Models\Genre;
 use App\Models\Area;
+use App\Models\Reservation;
 
 class ShopRegisterController extends Controller
 {
-    public function showShopRegister(){
+    public function showShopInfo(){
         $shop_id = Auth::user()->shop_id;
         $genres = Genre::all();
         $areas = Area::all();
         $shop = Shop::find($shop_id);
-        return view('shop_register',compact('genres', 'areas', 'shop'));
+
+        $reservations = Reservation::where('shop_id', $shop_id)->orderBy('date', 'asc')->orderBy('time', 'asc')->simplePaginate(10);
+        
+        return view('shop_management',compact('genres', 'areas', 'shop', 'reservations'));
     }
 
     public function storeShopRegister(ShopRequest $request){
@@ -38,6 +42,7 @@ class ShopRegisterController extends Controller
         $user->shop_id = $shopId;
         $user->save();
         //登録した店舗と管理者を紐づけ
+
 
         return redirect('/shop/registered')->with('message', '店舗情報を登録しました');
         }
