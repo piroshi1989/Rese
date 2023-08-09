@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Log;
 use App\Models\Like;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,11 +13,10 @@ public function toggleLike(Request $request)
 {
     $user_id = Auth::id();
     $shop_id = $request->shop_id;
-
     // 既にお気に入りに登録されているかチェック
-    $already_liked = Like::where('user_id', $user_id)->where('shop_id', $shop_id)->exists();
-
-    if (!$already_liked) {
+    $likeData= Like::where('user_id', $user_id)->where('shop_id', $shop_id)->first();
+    
+    if (!$likeData) {
         // お気に入り登録がされていない場合は新しくレコードを作成
         $like = new Like;
         $like->user_id = $user_id;
@@ -31,8 +30,18 @@ public function toggleLike(Request $request)
 
         $isLiked = false; // お気に入り登録が解除された場合はfalseを返す
     }
-
     // お気に入り登録の状態を返す
     return response()->json(['liked' => $isLiked]);
 }
+
+    public function getLikedData(Request $request)
+    {
+    $user_id = Auth::id();
+    $shop_id = $request->shop_id;
+
+    // 既にお気に入りに登録されているかチェック
+    $likeData = Like::where('user_id', $user_id)->where('shop_id', $shop_id)->first();
+
+    return response()->json($likeData);
+    }
 }

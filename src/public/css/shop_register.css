@@ -5,6 +5,7 @@
     margin:auto;
     margin-top:100px;
     box-shadow: 5px 5px 5px gray;
+    margin:20px;
 }
 
 .form__heading{
@@ -44,3 +45,8 @@
     border:none;
 }
 
+.main{
+    display: flex;
+    padding:20px;
+
+}

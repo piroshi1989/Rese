@@ -8,6 +8,7 @@ use App\Models\Shop;
 use App\Models\Area;
 use App\Models\Genre;
 use App\Models\Reservation;
+use App\Models\Like;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,6 +23,8 @@ class ShopController extends Controller
         $imageName = $alphabetGenreName . '.jpg';// ジャンル名を画像ファイル名として使用
         $imagePath = 'storage/' . $imageName; // 画像パス
         $shop->imagePath = $imagePath; // 画像パスを追加
+        $likeData = Like::where('user_id', $user_id)->where('shop_id', $shop->id)->exists();
+        $shop->likeData = $likeData;
 
         return $shop;
         });
@@ -29,7 +32,7 @@ class ShopController extends Controller
         $areas = Area::all();
         $genres = Genre::all();
 
-        return view('shop_all', compact('shops', 'areas', 'genres'));
+        return view('shop_all', compact('shops', 'areas', 'genres',));
     }
 
     public function showShopDetail($id){
@@ -54,7 +57,9 @@ class ShopController extends Controller
         }
         //予約人数を1～10人までとして$numbersに格納
 
-        $reservations = Reservation::where('shop_id', $shop->id)
+        $user_id = Auth::id();
+        
+        $reservations = Reservation::where('user_id', $user_id)->where('shop_id', $shop->id)
         ->where(function ($query) use ($today, $now) {
             $query->where('date', '<', $today)
         ->orWhere(function ($query) use ($today, $now) {

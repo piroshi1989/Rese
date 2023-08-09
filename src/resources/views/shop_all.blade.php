@@ -54,8 +54,8 @@
                 @auth
                     <span class="likes">
                         <i class="bi bi-heart-fill like-toggle"
-                        data-like-id="{{ $shop['like_id']}}"
-                        data-shop-id="{{ $shop['id'] }}"
+                        data-like-id="{{ $shop['likeData']}}"
+                        data-shop-id="{{ $shop->id }}"
                         data-user-id="{{ Auth::id() }}"></i>
                     </span>
                 @endauth
@@ -65,38 +65,6 @@
                     </span>
                 @endguest
             </div>
-            @auth
-            @if (!empty($shop['pastReservation']) || !empty($shop['todayReservations']))
-            <div class="rate-form">
-                <form action="{{ 'review' }}"  method='post'>
-                    @csrf
-                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                    <input type="hidden" name="shop_id" value="{{ $shop['id'] }}">
-                    <input id="star5" type="radio" name="stars" value="5">
-                    <label for="star5">★</label>
-                    <input id="star4" type="radio" name="stars" value="4">
-                    <label for="star4">★</label>
-                    <input id="star3" type="radio" name="stars" value="3">
-                    <label for="star3">★</label>
-                    <input id="star2" type="radio" name="stars" value="2">
-                    <label for="star2">★</label>
-                    <input id="star1" type="radio" name="stars" value="1">
-                    <label for="star1">★</label>
-                    <div>
-                        <label for="comment">評価：</label>
-                        <textarea id="comment" name="comment" rows="4" cols="30"></textarea>
-                    </div>
-                    <input type="submit" value="投稿する">
-                </form>
-                <div class="form__error">
-                    @error('stars')
-                    <p>ERROR</p>
-                    <p class="error">{{ $message }}</p>
-                    @enderror
-                </div>
-            </div>
-            @endauth
-            @endif
         </div>
     </div>
     @endforeach

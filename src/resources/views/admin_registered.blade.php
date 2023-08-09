@@ -14,7 +14,7 @@
     </div>
 </header>
 <div class="text__content">
-    <p>管理者を登録しました</p>
+    <p>店舗代表者を登録しました</p>
     <div class="return__button"><a href="/">ホーム画面に戻る</a></div>
 </div>
 @endsection

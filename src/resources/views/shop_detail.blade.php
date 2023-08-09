@@ -13,11 +13,6 @@
             <i class="bi bi-list" id="menu__icon" aria-hidden="true"></i>Rese</a>
             </div>
         </div>
-         @if (session('message'))
-    <div class="alert">
-        {{session('message')}}
-    </div>
-    @endif
         <div class="shop__content">
             <div class="shop__content-top">
                 <a class="icon-link" href="javascript:history.back()">
@@ -53,31 +48,33 @@
                     <label for="star4" data-label-num="4"></label>
                     <input type="radio" name="rating" value="5" id="star5">
                     <label for="star5" data-label-num="5"></label>
-            </div>
-                        <label for="comment">評価：</label>
-                        <textarea id="comment" name="comment" rows="4" cols="30"></textarea>
-                    </div>
-                    <input type="submit" value="投稿する">
+
+                    <textarea id="comment" name="comment" rows="4" cols="30"></textarea>
+                    <button class="form__button-submit" type="submit">評価する</button>
                 </form>
-                <div class="form__error">
-                    @error('rating')
-                    <p>ERROR</p>
-                    <p class="error">{{ $message }}</p>
-                    @enderror
-                </div>
             </div>
-            @endcan
+            <div class="form__error">
+                @error('rating')
+                <p>ERROR</p>
+                <p class="error">{{ $message }}</p>
+                @enderror
+            </div>
+            @if (session('message'))
+            <div class="alert">
+            {{session('message')}}
+            </div>
             @endif
+            @endif
+            @endcan
         </div>
     </div>
-    @if(Auth::check())
     @can('user')
     <div class = "right__content__reservation">
         <h2 class="reservation__content__title">予約</h2>
         <form action="{{ 'shop_detail' }}" method="post">
             @csrf
             <div class="reservation__input__field">
-                <input type="hidden" name="form_type" value="review_form">
+                <input type="hidden" name="form_type" value="reservation_form">
                 <input class="reservation__date" type="date"  name="date" min="{{ $today }}" >
                 <select name="time" class="reservation__time" >
                     <option value="">予約時間</option>
@@ -137,36 +134,16 @@
                 <input type="submit" value="予約する">
             </div>
         </form>
+    @endcan
+    @guest
+    <h2 class="arart__message">予約される方はログインしてください</h2>
+    @endguest
     </div>
-    @else
-    @can('user')
-        <h2 class="arart__message">予約される方はログインしてください</h2>
-    @endif
 </main>
+@endsection
 
-@if(Auth::check())
 @section('scripts')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="{{ asset('js/reservasion.js') }}"></script>
-<script>
-function starColor(starNum) {
-    $(".star-rating label").removeClass("fill");
-
-  for (let i = 1; i <= starNum; i++) {
-    $(`#star${i} + label`).addClass("fill");
-  }
-}
-
-$(".star-rating label").on('click mouseenter', function () {
-  const starNum = $(this).attr('data-label-num');
-  starColor(starNum);
-});
-
-$(".star-rating label").on('mouseleave', function () {
-  const starNum = $(".star-rating input:checked").val();
-  starColor(starNum);
-});
-</script>
-@endsection
-@endif
+<script src="{{ asset('js/reservation.js') }}"></script>
+<script src="{{ asset('js/star.js') }}"></script>
 @endsection

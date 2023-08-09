@@ -27,6 +27,10 @@ class RedirectIfAuthenticated
             }
         }
 
+        if(session()->get("url.intended")){
+            session()->put("redirect_after_email_verification", session()->get("url.intended"));
+        }
+
         return $next($request);
     }
 }

@@ -35,11 +35,4 @@ class ReservationController extends Controller
             return redirect('/mypage');
         }
     }
-
-    public function showReservation(){
-        $shop_id = Auth::user()->shop_id;
-        $reservations = Reservation::where('shop_id', $shop_id)->orderBy('date', 'asc')->orderBy('time', 'asc')->simplePaginate(10);
-
-        return view('reservation', compact('reservations'));
-    }
 }
