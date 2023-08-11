@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Shop;
 use App\Models\Genre;
 use App\Models\Area;
+use Carbon\Carbon;
 use App\Models\Reservation;
 
 class ShopRegisterController extends Controller
@@ -20,8 +21,19 @@ class ShopRegisterController extends Controller
         $areas = Area::all();
         $shop = Shop::find($shop_id);
 
-        $reservations = Reservation::where('shop_id', $shop_id)->orderBy('date', 'asc')->orderBy('time', 'asc')->simplePaginate(10);
-        
+        $today = Carbon::now()->format('Y-m-d');
+        $now = Carbon::now()->format('H:i');
+
+        $reservations = Reservation::where('shop_id', $shop_id)
+        ->where(function ($query) use ($today, $now) {
+            $query->where('date', '>', $today)
+        ->orWhere(function ($query) use ($today, $now) {
+            $query->where('date', '=', $today)->where('time', '>=', $now);
+        });
+        })
+        ->orderBy('date', 'asc')
+        ->simplePaginate(10);
+
         return view('shop_management',compact('genres', 'areas', 'shop', 'reservations'));
     }
 
