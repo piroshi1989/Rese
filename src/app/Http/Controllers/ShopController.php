@@ -58,7 +58,6 @@ class ShopController extends Controller
         //予約人数を1～10人までとして$numbersに格納
 
         $user_id = Auth::id();
-        
         $reservations = Reservation::where('user_id', $user_id)->where('shop_id', $shop->id)
         ->where(function ($query) use ($today, $now) {
             $query->where('date', '<', $today)
@@ -67,6 +66,8 @@ class ShopController extends Controller
         });
         })->get();
 
-        return view('shop_detail', compact('shop', 'imagePath','options', 'today', 'numbers','reservations' ));
+        $adminShopId = Auth::user()->shop_id;
+
+        return view('shop_detail', compact('shop', 'imagePath','options', 'today', 'numbers','reservations', 'adminShopId' ));
     }
 }

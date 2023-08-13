@@ -62,6 +62,9 @@ Route::delete('/like/{likeId}', [LikeController::class, 'toggleLike']);
       //メール送信用
       Route::post('/management/mail/confirm',[SendMailController::class,'confirmNoticeMail']);
       Route::post('/management/mail/send',[SendMailController::class,'sendNoticeMail']);
+
+      //本日の予約内容確認
+      Route::get('/today_reservation',[ReservationController::class,'showTodayReservation']);
     });
 
     // システム管理者のみ
