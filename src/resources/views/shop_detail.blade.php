@@ -67,6 +67,20 @@
             @endif
             @endcan
         </div>
+        @if($adminShopId == $shop->id)
+        @can('admin')
+        <div class="card">
+            <div class="card-header">
+                <h2>Todays Reservation</h2>
+            </div>
+            <div class="card-body">
+                <a href="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(300)->generate("/today_reservation")) !!}">
+                <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(300)->generate("/today_reservation")) !!}" alt="QR Code">
+                </a>
+            </div>
+        </div>
+        @endcan
+        @endif
     </div>
     @can('user')
     <div class = "right__content__reservation">

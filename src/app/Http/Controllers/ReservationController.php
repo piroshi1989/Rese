@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ReservationRequest;
 
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class ReservationController extends Controller
 {
@@ -34,5 +35,14 @@ class ReservationController extends Controller
         else{
             return redirect('/mypage');
         }
+    }
+
+    public function showTodayReservation(){
+        $shopId = Auth::user()->shop_id;
+        $today = Carbon::now()->format('Y-m-d');
+
+        $todayReservations = Reservation::where('shop_id', $shopId)->where('date', $today)->simplePaginate(10);
+
+        return view('today_reservation',compact('todayReservations', 'today', ));
     }
 }
