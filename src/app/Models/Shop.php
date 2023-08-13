@@ -31,9 +31,9 @@ class Shop extends Model
     return $this->hasMany(Like::class);
     }
 
-    public function user()
+    public function users()
     {
-    return $this->hasOne(User::class);
+    return $this->hasMany(User::class);
     }
 
     //後でViewで使う、いいねされているかを判定するメソッド。

@@ -38,6 +38,8 @@ class ShopRegisterController extends Controller
     }
 
     public function storeShopRegister(ShopRequest $request){
+        $formType = $request->input('form_type');
+        if ($formType === 'shop_form') {
         $user = Auth::user();
 
         if(empty($user->shop_id)){
@@ -59,8 +61,11 @@ class ShopRegisterController extends Controller
         return redirect('/shop/registered')->with('message', '店舗情報を登録しました');
         }
     }
+    }
 
     public function updateShopRegister(ShopRequest $request){
+        $formType = $request->input('form_type');
+        if ($formType === 'shop_form') {
             $user = Auth::user();
 
             if(!empty($user->shop_id)){
@@ -70,6 +75,7 @@ class ShopRegisterController extends Controller
             return redirect('/shop/registered')->with('message', '店舗情報が更新されました');
             //もしshop_idが登録されていたら更新する
             }
+        }
     }
     
     public function showShopRegistered(){

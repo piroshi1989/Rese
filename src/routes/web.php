@@ -11,6 +11,7 @@ use App\Http\Controllers\SearchShopsController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ShopRegisterController;
+use App\Http\Controllers\SendMailController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,6 +57,11 @@ Route::delete('/like/{likeId}', [LikeController::class, 'toggleLike']);
       Route::post('/shop/register', [ShopRegisterController::class,'storeShopRegister']);
       Route::patch('/shop/register', [ShopRegisterController::class,'updateShopRegister']);
       Route::get('/shop/registered',[ShopRegisterController::class,'showShopRegistered']);
+      Route::get('/shop/registered',[ShopRegisterController::class,'showShopRegistered']);
+
+      //メール送信用
+      Route::post('/management/mail/confirm',[SendMailController::class,'confirmNoticeMail']);
+      Route::post('/management/mail/send',[SendMailController::class,'sendNoticeMail']);
     });
 
     // システム管理者のみ
