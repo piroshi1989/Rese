@@ -8,14 +8,13 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
 use App\Models\User;
-use App\Models\Reservation;
 
 class ReminderEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
     protected $user;
-    protected $reserbvationShop;
+    protected $reservationShop;
     protected $reservationTime;
 
     /**
