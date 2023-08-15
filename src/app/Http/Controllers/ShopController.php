@@ -9,6 +9,7 @@ use App\Models\Area;
 use App\Models\Genre;
 use App\Models\Reservation;
 use App\Models\Like;
+
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,15 +19,15 @@ class ShopController extends Controller
         $shops = Shop::with('area', 'genre')->get()->sortBy('id');
 
         $shops = $shops->map(function ($shop) {
-        $user_id = Auth::id();
-        $alphabetGenreName = $shop->genre->alphabet_name; // ジャンル名を取得
-        $imageName = $alphabetGenreName . '.jpg';// ジャンル名を画像ファイル名として使用
-        $imagePath = 'storage/' . $imageName; // 画像パス
-        $shop->imagePath = $imagePath; // 画像パスを追加
-        $likeData = Like::where('user_id', $user_id)->where('shop_id', $shop->id)->exists();
-        $shop->likeData = $likeData;
+            $user_id = Auth::id();
+            $alphabetGenreName = $shop->genre->alphabet_name; // ジャンル名を取得
+            $imageName = $alphabetGenreName . '.jpg';// ジャンル名を画像ファイル名として使用
+            $imagePath = 'storage/' . $imageName; // 画像パス
+            $shop->imagePath = $imagePath; // 画像パスを追加
+            $likeData = Like::where('user_id', $user_id)->where('shop_id', $shop->id)->exists();
+            $shop->likeData = $likeData;
 
-        return $shop;
+            return $shop;
         });
 
         $areas = Area::all();

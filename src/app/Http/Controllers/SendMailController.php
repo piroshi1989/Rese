@@ -9,15 +9,14 @@ use App\Mail\SendNoticeMail;
 use App\Models\User;
 class SendMailController extends Controller
 {
-
-
     public function confirmNoticeMail(SendMailRequest $request)
     {
         $emails = $request->all();
         return view('mail_confirm', compact('emails'));
     }
 
-    public function sendNoticeMail(SendMailRequest $request){
+    public function sendNoticeMail(SendMailRequest $request)
+    {
         //フォームから受け取ったactionの値を取得
         $action = $request->input('action');
 
@@ -33,7 +32,7 @@ class SendMailController extends Controller
             ->withInput($emails);
         } else {
             foreach($users as $user){
-            //入力されたメールアドレスにメールを送信
+            //一般ユーザーすべてにメールを送信
             \Mail::to($user['email'])->send(new SendNoticeMail($emails));
             //再送信を防ぐためにトークンを再発行
             $request->session()->regenerateToken();
