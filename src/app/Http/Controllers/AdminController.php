@@ -12,12 +12,14 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
-    public function showAdminRegister(){
+    public function showAdminRegister()
+    {
         $shops = Shop::all();
         return view('admin_register',compact('shops'));
     }
 
-    public function storeAdminRegister(UserRequest $request){
+    public function storeAdminRegister(UserRequest $request)
+    {
         $store = new User;
         $store->role = $request->role;
         $store->name = $request->name;

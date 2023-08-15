@@ -11,14 +11,15 @@ use Carbon\Carbon;
 
 class ReservationController extends Controller
 {
-    public function storeReservation(ReservationRequest $request){
+    public function storeReservation(ReservationRequest $request)
+    {
         $formType = $request->input('form_type');
         if ($formType === 'reservation_form') {
-        // 予約フォームからの送信の場合の処理
-        $reservation = $request->all();
-        Reservation::create($reservation);
+            // 予約フォームからの送信の場合の処理
+            $reservation = $request->all();
+            Reservation::create($reservation);
 
-        return view('done');
+            return view('done');
         }
     }
 
@@ -29,15 +30,17 @@ class ReservationController extends Controller
 
     public function updateReservation(ReservationRequest $request){
         if(!empty($request)){
-        $reservation = $request->all();
-        Reservation::find($request->id)->update($reservation);
-        return redirect('/mypage')->with('message', '予約を更新しました');}
+            $reservation = $request->all();
+            Reservation::find($request->id)->update($reservation);
+
+            return redirect('/mypage')->with('message', '予約を更新しました');}
         else{
             return redirect('/mypage');
         }
     }
 
-    public function showTodayReservation(){
+    public function showTodayReservation()
+    {
         $shopId = Auth::user()->shop_id;
         $today = Carbon::now()->format('Y-m-d');
 

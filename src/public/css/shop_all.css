@@ -77,13 +77,18 @@ input {
 .shop__info {
     padding: 20px;
 }
+
 .shop__detail__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-decoration: none;
     font-size: 12px;
-    width: 30%;
+    width: 60%;
     background-color: #3560f6;
     border-radius: 3px;
-    padding: 5px;
+    padding: 3px 5px;
+    /* 上下の余白を調整 */
     text-align: center;
 }
 

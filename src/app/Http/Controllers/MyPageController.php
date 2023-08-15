@@ -11,7 +11,8 @@ use Carbon\Carbon;
 
 class MyPageController extends Controller
 {
-    public function showMyPage(){
+    public function showMyPage()
+    {
         $user_id = Auth::id();
         $user_name = Auth::user()->name;
 
@@ -33,12 +34,12 @@ class MyPageController extends Controller
         $likedShops = Shop::whereIn('id', $likedShopIds)->get();
         // Shop モデルから $likedShopIds に含まれる shop_id に対応する店舗を取得
         $likedShops = $likedShops->map(function ($likedShop) {
-        $romanizedGenreName = $likedShop->genre->alphabet_name; // ローマ字のジャンル名を取得
-        $imageName = $romanizedGenreName . '.jpg';// ジャンル名を画像ファイル名として使用
-        $imagePath = 'storage/' . $imageName; // 画像パス
-        $likedShop->imagePath = $imagePath; // 画像パスを追加
+            $romanizedGenreName = $likedShop->genre->alphabet_name; // ローマ字のジャンル名を取得
+            $imageName = $romanizedGenreName . '.jpg';// ジャンル名を画像ファイル名として使用
+            $imagePath = 'storage/' . $imageName; // 画像パス
+            $likedShop->imagePath = $imagePath; // 画像パスを追加
 
-        return $likedShop;
+            return $likedShop;
         });
 
         $startTime = Carbon::parse('11:30');

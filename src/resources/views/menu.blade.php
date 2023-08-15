@@ -37,7 +37,7 @@
                 <a class="menu-nav__link" href="/admin/register">AdminRegistration</a>
             </li>
             @endcan
-            @can('only_admin')
+            @can('admin')
             <li class="menu-nav__item">
                 <a class="menu-nav__link" href="/management">Management</a>
             </li>
@@ -45,6 +45,9 @@
             @can('user')
             <li class="menu-nav__item">
                 <a class="menu-nav__link" href="/mypage">Mypage</a>
+            </li>
+            <li class="menu-nav__item">
+                <a class="menu-nav__link" href="/payment">Payment</a>
             </li>
             @endcan
             @endauth

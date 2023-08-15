@@ -80,7 +80,7 @@
             <a class="shop__genre">#{{ $shop->genre->name }}</a>
             <div class="shop__bottom">
                 <div class="shop__detail__button">
-                    <a href="{{ asset('/detail/'. $shop['id']) }}">詳しくみる</a>
+                    <a href="{{ asset('/detail/'. $shop['id'])}}">詳しくみる</a>
                 </div>
 
                 @auth
@@ -102,8 +102,7 @@
     @endforeach
     @endif
 </main>
-@endsection
-@section('scripts')
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{{ asset('js/ajaxlike.js') }}"></script>
 @endsection

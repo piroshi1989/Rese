@@ -6,16 +6,17 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ShopRequest;
 
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 use App\Models\Shop;
 use App\Models\Genre;
 use App\Models\Area;
-use Carbon\Carbon;
 use App\Models\Reservation;
 
 class ShopRegisterController extends Controller
 {
-    public function showShopInfo(){
+    public function showShopInfo()
+    {
         $shop_id = Auth::user()->shop_id;
         $genres = Genre::all();
         $areas = Area::all();
@@ -37,19 +38,20 @@ class ShopRegisterController extends Controller
         return view('shop_management',compact('genres', 'areas', 'shop', 'reservations'));
     }
 
-    public function storeShopRegister(ShopRequest $request){
+    public function storeShopRegister(ShopRequest $request)
+    {
         $formType = $request->input('form_type');
         if ($formType === 'shop_form') {
         $user = Auth::user();
 
         if(empty($user->shop_id)){
-        $store = new Shop;
-        $store->name = $request->name;
-        $store->genre_id = $request->genre_id;
-        $store->area_id = $request->area_id;
-        $store->detail = $request->detail;
-        $store->save();
-        //新しい店舗を登録
+            $store = new Shop;
+            $store->name = $request->name;
+            $store->genre_id = $request->genre_id;
+            $store->area_id = $request->area_id;
+            $store->detail = $request->detail;
+            $store->save();
+            //新しい店舗を登録
 
         $shopId = $store->id;
 
@@ -63,22 +65,24 @@ class ShopRegisterController extends Controller
     }
     }
 
-    public function updateShopRegister(ShopRequest $request){
+    public function updateShopRegister(ShopRequest $request)
+    {
         $formType = $request->input('form_type');
         if ($formType === 'shop_form') {
             $user = Auth::user();
 
             if(!empty($user->shop_id)){
-            $shop = $request->all();
-            Shop::find($user->shop_id)->update($shop);
-            
-            return redirect('/shop/registered')->with('message', '店舗情報が更新されました');
-            //もしshop_idが登録されていたら更新する
+                $shop = $request->all();
+                Shop::find($user->shop_id)->update($shop);
+                
+                return redirect('/shop/registered')->with('message', '店舗情報が更新されました');
+                //もしshop_idが登録されていたら更新する
             }
         }
     }
-    
-    public function showShopRegistered(){
+
+    public function showShopRegistered()
+    {
         return view('shop_registered');
     }
 }

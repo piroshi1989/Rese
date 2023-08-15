@@ -154,9 +154,7 @@
     @endguest
     </div>
 </main>
-@endsection
 
-@section('scripts')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{{ asset('js/reservation.js') }}"></script>
 <script src="{{ asset('js/star.js') }}"></script>

@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('css')
-
 <link rel="stylesheet" href="{{ asset('css/mail_confirm.css') }}">
 @endsection
 
@@ -20,7 +19,7 @@
         <div class="confirm__heading">
             <h2>メール内容確認</h2>
         </div>
-        <form class="form" action="/management/mail/send" method="post">
+        <form class="form" action="/mail/send" method="post">
             @csrf
             <div class="confirm-table">
                 <table class="confirm-table__inner">
