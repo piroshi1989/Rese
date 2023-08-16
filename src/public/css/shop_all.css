@@ -20,7 +20,7 @@ form {
 }
 
 select {
-    width: 20%;
+    width: 30%;
     margin: 0;
     border: 0;
     outline: none;
@@ -42,7 +42,7 @@ input {
     margin: 20px;
     box-shadow: 3px 3px 3px gray;
     white-space: nowrap;
-    width: 50%;
+    width: 65%;
 }
 
 .header-utilities {
@@ -78,24 +78,6 @@ input {
     padding: 20px;
 }
 
-.shop__detail__button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    font-size: 12px;
-    width: 60%;
-    background-color: #3560f6;
-    border-radius: 3px;
-    padding: 3px 5px;
-    /* 上下の余白を調整 */
-    text-align: center;
-}
-
-.shop__detail__button a {
-    color: #fff;
-}
-
 .shop__title {
     font-size: 24px;
     font-weight: bold;
@@ -106,26 +88,83 @@ input {
     font-size: 12px;
 }
 
-.likes {
-    margin: 10px;
-    font-size: 24px;
-    cursor: pointer;
-    color:gainsboro;
+.shop__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
 }
 
-.likes__guest {
+.shop__detail__button {
+    text-decoration: none;
+    font-size: 12px;
+    width: 60%;
+    height: auto;
+    background-color: #3560f6;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+}
+
+.shop__detail__button a {
+    color: #fff;
+}
+
+.likes__guest,.likes {
     margin: 10px;
     font-size: 24px;
     color: gainsboro;
 }
 
-
-.shop__bottom {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+.likes {
+    cursor: pointer;
 }
 
 .liked {
     color:red;
+}
+
+@media screen and (max-width: 768px) {
+    .shop__content {
+        width: 100%;
+    }
+
+    .shop__info {
+        padding: 5px;
+    }
+
+    .shop__detail__button {
+        padding: 5px;
+        font-size:14px;
+        width:40%;
+    }
+
+    .header__inner {
+        display: block;
+    }
+
+    select {
+        width: 70%;
+        border:1px solid gainsboro;
+        margin-bottom:20px;
+    }
+
+    .keyword{
+        display:block;
+        margin-top:5px;
+    }
+    .search__icon {
+        left: 80%;
+        top: 45%;
+    }
+
+    .shop__area,.shop__genre {
+    font-size: 18px;
+    }
+
+    .likes__guest,
+    .likes {
+        margin: 20px;
+        font-size: 32px;
+    }
 }

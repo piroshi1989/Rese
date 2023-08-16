@@ -19,7 +19,7 @@
     <div class="main__content__left">
         <div class="form__content">
             <div class="form__heading">
-                <p>ShopInfomation</p>
+                <p class="form__title">ShopInfomation</p>
             </div>
             @if(empty($shop))
             <form class="form" action="/shop/register" method="post">
@@ -159,10 +159,10 @@
             @endif
         </div>
         <div class="form__content">
-            <div class="form__heading">
-                <p>NoticeMail</p>
+            <div class="mail-form__heading">
+                <p class="form__title">NoticeMail</p>
             </div>
-            <form class="form" action="/management/mail/confirm" method="post">
+            <form class="form" action="/mail/confirm" method="post">
                 @csrf
                 <input type="hidden" name="form_type" value="mail_form">
                 <div class="form__group">
@@ -179,7 +179,7 @@
                 <div class="form__group">
                     <div class="form__group-content">
                         <label>Main text</label>
-                        <textarea name="body">{{ old('body') }}</textarea>
+                        <textarea name="body" rows="4" cols="30">{{ old('body') }}</textarea>
                     </div>
                     <div class="form__error">
                         @error('body')
@@ -187,7 +187,7 @@
                         @enderror
                     </div>
                     <div class="form__button">
-                        <button class="form__button-submit" type="submit">送信</button>
+                        <button class="mail-form__button-submit" type="submit">送信</button>
                     </div>
                 </div>
             </form>
@@ -207,7 +207,7 @@
                     <th class="reservation-table__header">
                         <span class="reservation-table__header-span">time</span>
                     </th>
-                    <th class="reservation-table__header">
+                    <th class="reservation-table__header  number-column">
                         <span class="reservation-table__header-span">number</span>
                     </th>
                 </tr>

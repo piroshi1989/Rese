@@ -27,7 +27,7 @@ class SendNoticeMail extends Mailable
         $this->title = $emails['title'];
         $this->body  = $emails['body'];
 
-        $this->senderShop = auth::user()->shop->name;
+        $this->senderShop = Auth::user()->shop->name;
     }
 
     /**

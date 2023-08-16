@@ -11,7 +11,7 @@ use Carbon\Carbon;
 
 class ReservationController extends Controller
 {
-    public function storeReservation(ReservationRequest $request)
+    public function store(ReservationRequest $request)
     {
         $formType = $request->input('form_type');
         if ($formType === 'reservation_form') {
@@ -23,12 +23,14 @@ class ReservationController extends Controller
         }
     }
 
-    public function destoryReservation(Request $request){
+    public function destroy(Request $request)
+    {
         Reservation::find($request->id)->delete();
         return redirect('/mypage')->with('message', '予約を削除しました');
     }
 
-    public function updateReservation(ReservationRequest $request){
+    public function update(ReservationRequest $request)
+    {
         if(!empty($request)){
             $reservation = $request->all();
             Reservation::find($request->id)->update($reservation);

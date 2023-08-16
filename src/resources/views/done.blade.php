@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('css')
-<link rel="stylesheet" href="{{ asset('css/thanks.css') }}">
-@endsection
-
 @section('content')
 <header class="header">
     <div class="header__inner">
@@ -15,7 +11,8 @@
 </header>
 
 <div class="text__content">
-    <p>ご予約ありがとうございます</p>
-    <div class="return__button"><a href="javascript:history.back()">戻る</a></div>
+    <p>ご予約ありがとう<br>
+        ございます</p>
+    <div class="return__button"><a href="/mypage">予約状況確認</a></div>
 </div>
 @endsection

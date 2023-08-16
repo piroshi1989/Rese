@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
-
 use App\Models\Shop;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -18,7 +17,7 @@ class AdminController extends Controller
         return view('admin_register',compact('shops'));
     }
 
-    public function storeAdminRegister(UserRequest $request)
+    public function storeAdmin(UserRequest $request)
     {
         $store = new User;
         $store->role = $request->role;

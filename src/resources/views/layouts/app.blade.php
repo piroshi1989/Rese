@@ -14,10 +14,10 @@
 </head>
 <body>
     @can('superadmin')
-    <p class= "admin">管理者でログイン中</p>
+    <p class= "user">管理者でログイン中</p>
     @endcan
     @can('admin')
-    <p class= "admin">店舗代表者でログイン中</p>
+    <p class= "user">店舗代表者でログイン中</p>
     @endcan
     @yield('content')
 </body>

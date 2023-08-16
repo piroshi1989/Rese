@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 //use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
-use App\Http\Requests\CreateUserRequest;
 use Laravel\Fortify\Contracts\LogoutResponse;
 use Laravel\Fortify\Contracts\LoginResponse;
 
