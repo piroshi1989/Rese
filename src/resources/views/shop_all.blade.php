@@ -27,7 +27,7 @@
                     @foreach($genres as $genre)
                     <option value={{ $genre['id'] }}>{{ $genre['name'] }}</option>
                 @endforeach
-                </select><input type="text" class="" name="keyword" placeholder="Search..."><button type="submit" class="search__icon"><i class="bi bi-search"></i></button>
+                </select><input type="text" class="keyword" name="keyword" placeholder="Search..."><button type="submit" class="search__icon"><i class="bi bi-search"></i></button>
             </form>
         </div>
     </div>
@@ -49,20 +49,20 @@
             <a class="shop__genre">#{{ $shop->genre->name }}</a>
             <div class="shop__bottom">
                 <div class="shop__detail__button">
-                    <a href="{{ asset('/detail/'. $shop['id']) }}">詳しくみる</a>
+                    <a href="{{ asset('/detail/'. $shop['id'])}}">詳しくみる</a>
                 </div>
                 @auth
-                    <span class="likes">
-                        <i class="bi bi-heart-fill like-toggle"
-                        data-like-id="{{ $shop['likeData']}}"
-                        data-shop-id="{{ $shop->id }}"
-                        data-user-id="{{ Auth::id() }}"></i>
-                    </span>
+                <div class="likes">
+                    <i class="bi bi-heart-fill like-toggle"
+                    data-like-id="{{ $shop['like_id']}}"
+                    data-shop-id="{{ $shop['id'] }}"
+                    data-user-id="{{ Auth::id() }}"></i>
+                </div>
                 @endauth
                 @guest
-                    <span class="likes__guest">
-                        <i class="bi bi-heart-fill"></i>
-                    </span>
+                <div class="likes__guest">
+                    <i class="bi bi-heart-fill"></i>
+                </div>
                 @endguest
             </div>
         </div>
@@ -82,19 +82,18 @@
                 <div class="shop__detail__button">
                     <a href="{{ asset('/detail/'. $shop['id'])}}">詳しくみる</a>
                 </div>
-
                 @auth
-                    <span class="likes">
-                        <i class="bi bi-heart-fill like-toggle"
-                        data-like-id="{{ $shop['like_id']}}"
-                        data-shop-id="{{ $shop['id'] }}"
-                        data-user-id="{{ Auth::id() }}"></i>
-                    </span>
+                <div class="likes">
+                    <i class="bi bi-heart-fill like-toggle"
+                    data-like-id="{{ $shop['like_id']}}"
+                    data-shop-id="{{ $shop['id'] }}"
+                    data-user-id="{{ Auth::id() }}"></i>
+                </div>
                 @endauth
                 @guest
-                    <span class="likes__guest">
-                        <i class="bi bi-heart-fill"></i>
-                    </span>
+                <div class="likes__guest">
+                    <i class="bi bi-heart-fill"></i>
+                </div>
                 @endguest
             </div>
         </div>

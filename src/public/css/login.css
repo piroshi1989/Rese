@@ -45,3 +45,9 @@
 .form__button-submit:hover {
     background-color: #0056b3;
 }
+
+@media screen and (max-width: 768px) {
+    .form__content{
+        width:70%;
+    }
+}

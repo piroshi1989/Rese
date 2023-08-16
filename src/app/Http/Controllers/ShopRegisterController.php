@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 use App\Http\Requests\ShopRequest;
-
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-
 use App\Models\Shop;
 use App\Models\Genre;
 use App\Models\Area;
@@ -38,7 +36,7 @@ class ShopRegisterController extends Controller
         return view('shop_management',compact('genres', 'areas', 'shop', 'reservations'));
     }
 
-    public function storeShopRegister(ShopRequest $request)
+    public function storeShop(ShopRequest $request)
     {
         $formType = $request->input('form_type');
         if ($formType === 'shop_form') {
@@ -65,7 +63,7 @@ class ShopRegisterController extends Controller
     }
     }
 
-    public function updateShopRegister(ShopRequest $request)
+    public function updateShop(ShopRequest $request)
     {
         $formType = $request->input('form_type');
         if ($formType === 'shop_form') {

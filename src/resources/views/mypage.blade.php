@@ -93,6 +93,8 @@
                         </div>
                     </div>
                 @endforeach
+                @else
+                <p>予約はありません</p>
                 @endif
                 {{ $reservations->links() }}
         </div>
@@ -122,6 +124,8 @@
                     </div>
                 </div>
             @endforeach
+            @else
+            <p>お気に入り店舗はありません</p>
             @endif
             </div>
         </div>

@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 
 use App\Models\Shop;
 use App\Models\Area;
 use App\Models\Genre;
 use App\Models\Reservation;
 use App\Models\Like;
-
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 

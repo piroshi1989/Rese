@@ -32,7 +32,7 @@
                     <tr class="confirm-table__row">
                         <th class="confirm-table__header">Main Text</th>
                         <td class="confirm-table__text">
-                            <input type="text" name="body" value="{{ $emails['body'] }}" readonly/>
+                            <textarea name="body" readonly>{{ $emails['body'] }}</textarea>
                         </td>
                     </tr>
                 </table>

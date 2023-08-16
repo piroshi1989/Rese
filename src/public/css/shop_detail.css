@@ -146,3 +146,17 @@
     border-radius: 5px;
     border: none;
 }
+
+@media screen and (max-width: 768px) {
+
+    .shop__detail__contant {
+            display: block;
+        }
+    
+        .left__content__shop,
+        .right__content__reservation {
+            width: 90%;
+            margin: 0 10px;
+        }
+
+}

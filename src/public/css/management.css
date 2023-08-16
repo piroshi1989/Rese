@@ -15,7 +15,14 @@
     text-align: left;
 }
 
-.form__heading p {
+.mail-form__heading {
+    color: #fff;
+    background-color: #00ff00;
+    border-radius: 5px 5px 0 0;
+    text-align: left;
+}
+
+.form__title {
     padding: 10px 15px;
 }
 
@@ -31,8 +38,6 @@ select {
     width: 80%;
 }
 
-
-
 .form__button {
     text-align: right;
 }
@@ -46,41 +51,85 @@ select {
     border: none;
 }
 
+.mail-form__button-submit {
+    color: #fff;
+    background-color: #00ff00;
+    padding: 5px 15px;
+    margin: 20px;
+    border-radius: 5px;
+    border: none;
+}
+
 .main {
     display: flex;
-    padding: 20px;
-
+    padding: 10px;
 }
 
 /*reservation table*/
-
 .reservation-table {
-    margin: 0 auto;
-    width: 100%;
     text-align: center;
 }
 
 .reservation-table__inner {
     width: 100%;
+    table-layout: fixed;
+}
+
+.reservation-table__header {
+    padding: 5px;
+    width: 25%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.reservation-table__item {
+    padding: 5px;
+    width: 25%;
+    text-align: center;
 }
 
 .reservation-table__row {
     border-bottom: 1px solid #ddd;
-}
-
-.reservation-table__header {
-    padding: 12px;
-    width: 20%;
-    text-align: left;
-    font-weight: bold;
+    text-align: center;
+    width:25%;
 }
 
 .reservation-table__header-span {
-    margin-right: 40%;
+    margin-right: 20%;
 }
-
 
 .main__content__right{
     margin-left:30px;
     width:70%;
+}
+
+@media screen and (max-width: 768px) {
+    .main {
+        display: block;
+        padding: 3px;
+    }
+
+    .form__content {
+        width: 90%;
+        margin:0 auto;
+        margin-bottom:20px;
+    }
+
+    .reservation-table__header,.reservation-table__item, .reservation-table__row {
+    width: 23%;
+    font-size:16px;
+    padding: 0;
+    }
+
+    .reservation-table__inner {
+    width: 100%;
+}
+.main__content__right {
+    width: 90%;
+    margin:0 auto;
+}
+
+.reservation-table{
+    margin:20px 0;
+}
 }

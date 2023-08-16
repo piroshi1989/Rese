@@ -1,3 +1,7 @@
+@media screen and (max-width: 768px) {
+
+}
+
 .header__logo{
     color:#3560F6;
     font-size: 32px;
@@ -37,7 +41,7 @@ body{
     margin: 0 10px;
 }
 
-.admin{
+.user{
     font-weight: bold;
     margin:20px;
     font-size:30px;
@@ -81,4 +85,53 @@ body{
 
 .return__button a {
     color: #fff;
+}
+
+/* 通常のテキストエリアのスタイル */
+textarea {
+    width: 100%;
+    /* 幅を100%にすることで親要素に合わせて伸縮します */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    resize: vertical;
+    /* テキストエリアの垂直リサイズを有効にする */
+}
+
+/* プレースホルダーのスタイル */
+textarea::placeholder {
+    color: #aaa;
+}
+
+/* プレースホルダーが表示されている時のスタイル */
+textarea:placeholder-shown {
+    /* プレースホルダーが表示されているときのスタイルを指定 */
+}
+
+@media screen and (max-width: 768px) {
+    .header__logo {
+        font-size: 24px;
+        padding: 10px;
+    }
+
+    .text__content {
+        width: 70%;
+        padding: 20px;
+    }
+
+    .text__content p {
+        margin: 10px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .return__button {
+        width: 60%;
+        margin-top:20px;
+    }
+
+    .user {
+        font-size: 24px;
+    }
 }
