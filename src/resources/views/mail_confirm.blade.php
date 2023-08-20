@@ -26,13 +26,13 @@
                     <tr class="confirm-table__row">
                         <th class="confirm-table__header">Title</th>
                         <td class="confirm-table__text">
-                            <input type="text" name="title" class="title"  value="{{ $emails['title'] }}" readonly>
+                            <input type="text" name="title" class="title"  value="{{ $email['title'] }}" readonly>
                         </td>
                     </tr>
                     <tr class="confirm-table__row">
                         <th class="confirm-table__header">Main Text</th>
                         <td class="confirm-table__text">
-                            <textarea name="body" readonly>{{ $emails['body'] }}</textarea>
+                            <textarea name="body" readonly>{{ $email['body'] }}</textarea>
                         </td>
                     </tr>
                 </table>

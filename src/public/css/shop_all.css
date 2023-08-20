@@ -78,21 +78,23 @@ input {
     padding: 20px;
 }
 
-.shop__title {
-    font-size: 24px;
-    font-weight: bold;
-}
-
 .shop__area,
 .shop__genre {
+    display: inline-block;
+    margin-right: 10px;
     font-size: 12px;
+}
+
+.shop__title {
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .shop__bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .shop__detail__button {
@@ -111,7 +113,7 @@ input {
 }
 
 .likes__guest,.likes {
-    margin: 10px;
+    margin: 5px;
     font-size: 24px;
     color: gainsboro;
 }

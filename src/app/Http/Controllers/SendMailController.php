@@ -11,8 +11,8 @@ class SendMailController extends Controller
 {
     public function confirmNoticeMail(SendMailRequest $request)
     {
-        $emails = $request->all();
-        return view('mail_confirm', compact('emails'));
+        $email = $request->all();
+        return view('mail_confirm', compact('email'));
     }
 
     public function sendNoticeMail(SendMailRequest $request)
@@ -21,7 +21,7 @@ class SendMailController extends Controller
         $action = $request->input('action');
 
         //フォームから受け取ったactionを除いたinputの値を取得
-        $emails = $request->except('action');
+        $email = $request->except('action');
 
         //一般ユーザ
         $users = User::where('role', 0)->get();
@@ -29,11 +29,11 @@ class SendMailController extends Controller
         //actionの値で分岐
         if($action !== 'submit'){
             return redirect('/management')
-            ->withInput($emails);
+            ->withInput($email);
         } else {
             foreach($users as $user){
             //一般ユーザーすべてにメールを送信
-            \Mail::to($user['email'])->send(new SendNoticeMail($emails));
+            \Mail::to($user['email'])->send(new SendNoticeMail($email));
             //再送信を防ぐためにトークンを再発行
             $request->session()->regenerateToken();
             }

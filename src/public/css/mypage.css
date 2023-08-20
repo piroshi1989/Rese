@@ -103,6 +103,12 @@
     border-radius: 3px 3px 0 0;
 }
 
+.shop__area,
+.shop__genre {
+    display: inline-block;
+    margin-right: 5px;
+}
+
 .liked__shops {
     display: flex;
     flex-wrap: wrap;
@@ -162,11 +168,13 @@
 
     .reservation__table {
         margin: 5px;
+        margin-bottom:20px;
+        width:50%;
     }
 
     .left__reservations__content,.right__liked__content {
     width: 95%;
-    margin: 0 5px;
+    margin:5px;
     }
 
     .right__liked__content {

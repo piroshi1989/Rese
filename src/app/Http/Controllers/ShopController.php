@@ -65,8 +65,8 @@ class ShopController extends Controller
             $query->where('date', '=', $today)->where('time', '<=', $now);
         });
         })->get();
-
-        $adminShopId = Auth::user()->shop_id;
+        
+        $adminShopId = Auth::check() ? Auth::user()->shop_id : null;
 
         return view('shop_detail', compact('shop', 'imagePath','options', 'today', 'numbers','reservations', 'adminShopId' ));
     }

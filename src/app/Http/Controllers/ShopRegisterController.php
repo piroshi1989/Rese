@@ -33,7 +33,7 @@ class ShopRegisterController extends Controller
         ->orderBy('date', 'asc')
         ->simplePaginate(10);
 
-        return view('shop_management',compact('genres', 'areas', 'shop', 'reservations'));
+        return view('shop_management',compact('genres', 'areas', 'shop', 'reservations', 'shop_id'));
     }
 
     public function storeShop(ShopRequest $request)
@@ -58,7 +58,7 @@ class ShopRegisterController extends Controller
         //登録した店舗と管理者を紐づけ
 
 
-        return redirect('/shop/registered')->with('message', '店舗情報を登録しました');
+        return redirect('/management')->with('message', '店舗情報を登録しました');
         }
     }
     }
@@ -73,14 +73,9 @@ class ShopRegisterController extends Controller
                 $shop = $request->all();
                 Shop::find($user->shop_id)->update($shop);
                 
-                return redirect('/shop/registered')->with('message', '店舗情報が更新されました');
+                return redirect('/management')->with('message', '店舗情報が更新されました');
                 //もしshop_idが登録されていたら更新する
             }
         }
-    }
-
-    public function showShopRegistered()
-    {
-        return view('shop_registered');
     }
 }

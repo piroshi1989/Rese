@@ -1,13 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="header__inner">
+    <div class="header-utilities">
+        <a class="icon-link rese" href="/menu">
+        <i class="bi bi-list" id="menu__icon" aria-hidden="true"></i>Rese</a>
+    </div>
+</div>
 <div class="container justify-content-center">
     @if (session('flash_alert'))
-        <div class="alert alert-danger">{{ session('flash_alert') }}</div>
+    <div class="alert alert-danger">{{ session('flash_alert') }}</div>
     @elseif(session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
     @endif
     <div class="p-3">
         <div class="col-12 col-md-6 card">

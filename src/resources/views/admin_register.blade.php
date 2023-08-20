@@ -56,20 +56,20 @@
                 </select>
             </div>
         </div>
-            <div class="form__group">
-                <div class="form__group-content">
-                    <i class="bi bi-lock-fill"></i>
-                    <input type="text" name="password" placeholder="Password">
-                </div>
-                <div class="form__error">
-                    @error('password')
-                    {{ $message }}
-                    @enderror
-                </div>
+        <div class="form__group">
+            <div class="form__group-content">
+                <i class="bi bi-lock-fill"></i>
+                <input type="text" name="password" placeholder="Password">
             </div>
-            <div class="form__button">
-                <button class="form__button-submit" type="submit">登録</button>
+            <div class="form__error">
+                @error('password')
+                {{ $message }}
+                @enderror
             </div>
+        </div>
+        <div class="form__button">
+            <button class="form__button-submit" type="submit">登録</button>
+        </div>
     </form>
 </div>
 @endsection
