@@ -1,7 +1,4 @@
 @extends('layouts.app')
-@section('csrf-token')
-<meta name="csrf-token" content="{{ csrf_token() }}">
-@endsection
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/shop_all.css') }}">
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -21,12 +18,12 @@
                     <option value="">都道府県を選択</option>
                     @foreach($areas as $area)
                     <option value={{ $area['id'] }}>{{ $area['name'] }}</option>
-                @endforeach
+                    @endforeach
                 </select><select name="genre">
                     <option value="">ジャンルを選択</option>
                     @foreach($genres as $genre)
                     <option value={{ $genre['id'] }}>{{ $genre['name'] }}</option>
-                @endforeach
+                    @endforeach
                 </select><input type="text" class="keyword" name="keyword" placeholder="Search..."><button type="submit" class="search__icon"><i class="bi bi-search"></i></button>
             </form>
         </div>
@@ -34,9 +31,6 @@
 </header>
 
 <main class="shop__main">
-<div id="star">
-<star-rating v-model="rating"></star-rating>
-</div>
     @if(empty($searchedShops))
     @foreach($shops as $shop)
     <div class="shop__content">
@@ -45,8 +39,8 @@
         </div>
         <div class="shop__info">
             <p class="shop__title">{{ $shop['name'] }}</p>
-            <a class="shop__area">#{{ $shop->area->name }}</a>
-            <a class="shop__genre">#{{ $shop->genre->name }}</a>
+            <p class="shop__area">#{{ $shop->area->name }}</p>
+            <p class="shop__genre">#{{ $shop->genre->name }}</p>
             <div class="shop__bottom">
                 <div class="shop__detail__button">
                     <a href="{{ asset('/detail/'. $shop['id'])}}">詳しくみる</a>
@@ -76,8 +70,8 @@
         </div>
         <div class="shop__info">
             <p class="shop__title">{{ $shop['name'] }}</p>
-            <a class="shop__area">#{{ $shop->area->name }}</a>
-            <a class="shop__genre">#{{ $shop->genre->name }}</a>
+            <p class="shop__area">#{{ $shop->area->name }}</p>
+            <p class="shop__genre">#{{ $shop->genre->name }}</p>
             <div class="shop__bottom">
                 <div class="shop__detail__button">
                     <a href="{{ asset('/detail/'. $shop['id'])}}">詳しくみる</a>

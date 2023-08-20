@@ -36,16 +36,17 @@ Route::middleware('auth')->group(function () {
   Route::get('/thanks', [ThanksController::class, 'showThanks']);
 });
 
-  //認証必要
+//メール認証必要
 Route::middleware('verified')->group(function () {
+  Route::get('/', [ShopController::class, 'showShop']);
   //一般ユーザのみ
   Route::group(['middleware' => ['can:user']], function () {
     Route::prefix('mypage')->group(function () {
       Route::get('/', [MyPageController::class, 'showMyPage']);
       //予約削除用ルート
-      Route::delete('/mypage/delete',[ReservationController::class, 'destroy']);
+      Route::delete('/delete',[ReservationController::class, 'destroy']);
       //予約更新用ルート
-      Route::patch('/mypage/update', [ReservationController::class, 'update']);
+      Route::patch('/update', [ReservationController::class, 'update']);
       //予約送信用ルート
       });
     Route::post('/detail/{id}', [ReservationController::class,'store']);
@@ -67,11 +68,8 @@ Route::middleware('verified')->group(function () {
     // 店舗情報、予約管理画面
     Route::get('/management',[ShopRegisterController::class,'showShopInfo']);
     //店舗情報作成、追加
-    Route::prefix('shop')->group(function () {
-      Route::post('/register', [ShopRegisterController::class,'storeShop']);
-      Route::patch('/register', [ShopRegisterController::class,'updateShop']);
-      Route::get('/registered',[ShopRegisterController::class,'showShopRegistered']);
-    });
+    Route::post('shop/register', [ShopRegisterController::class,'storeShop']);
+    Route::patch('shop/update', [ShopRegisterController::class,'updateShop']);
     //メール送信用
     Route::post('/mail/confirm',[SendMailController::class,'confirmNoticeMail']);
     Route::post('/mail/send',[SendMailController::class,'sendNoticeMail']);

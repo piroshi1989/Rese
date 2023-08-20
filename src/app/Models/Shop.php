@@ -36,7 +36,7 @@ class Shop extends Model
     return $this->hasMany(User::class);
     }
 
-    //後でViewで使う、いいねされているかを判定するメソッド。
+    //いいねされているかを判定するメソッド。
     public function isLikedBy($user_id): bool
     {
     // この店舗をお気に入り登録しているかを判定
@@ -63,6 +63,6 @@ class Shop extends Model
 
     public function reviews()
     {
-        return $this->hasMany(ShopReview::class, 'shop_id', 'id');
+        return $this->hasMany(Review::class, 'shop_id', 'id');
     }
 }

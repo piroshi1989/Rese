@@ -15,6 +15,11 @@
         </div>
     </div>
 </header>
+@if (session('message'))
+<div class="alert">
+    {{session('message')}}
+</div>
+@endif
 <main class="main">
     <div class="main__content__left">
         <div class="form__content">
@@ -88,7 +93,7 @@
                 </div>
             </form>
             @else
-            <form class="form" action="/shop/register" method="post">
+            <form class="form" action="/shop/update" method="post">
                 @method('PATCH')
                 @csrf
                 <input type="hidden" name="form_type" value="shop_form">
@@ -158,6 +163,7 @@
             </form>
             @endif
         </div>
+        @if(!empty($shop_id))
         <div class="form__content">
             <div class="mail-form__heading">
                 <p class="form__title">NoticeMail</p>
@@ -192,6 +198,7 @@
                 </div>
             </form>
         </div>
+        @endif
     </div>
     <div class="main__content__right">
         <div class="reservation-table">

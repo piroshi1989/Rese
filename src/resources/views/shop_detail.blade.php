@@ -13,6 +13,11 @@
             <i class="bi bi-list" id="menu__icon" aria-hidden="true"></i>Rese</a>
             </div>
         </div>
+        @if (session('message'))
+        <div class="alert">
+        {{session('message')}}
+        </div>
+        @endif
         <div class="shop__content">
             <div class="shop__content-top">
                 <a class="icon-link" href="javascript:history.back()">
@@ -24,8 +29,8 @@
                 <img src="{{asset($imagePath)}}">
             </div>
             <div class="shop__info">
-                <a class="shop__area">#{{ $shop->area->name}}</a>
-                <a class="shop__genre">#{{ $shop->genre->name }}</a>
+                <p class="shop__area">#{{ $shop->area->name}}</p>
+                <p class="shop__genre">#{{ $shop->genre->name }}</p>
                 <div class="shop__detail">
                     <p>{{ $shop['detail'] }}</p>
                 </div>
@@ -59,11 +64,6 @@
                 <p class="error">{{ $message }}</p>
                 @enderror
             </div>
-            @if (session('message'))
-            <div class="alert">
-            {{session('message')}}
-            </div>
-            @endif
             @endif
             @endcan
         </div>

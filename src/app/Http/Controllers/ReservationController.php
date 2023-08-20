@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Reservation;
-
 use Illuminate\Http\Request;
 use App\Http\Requests\ReservationRequest;
-
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 

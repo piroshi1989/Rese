@@ -47,11 +47,17 @@
 }
 
 .shop__info {
-    margin-top:20px;
+    margin-top:10px;
+}
+
+.shop__area,
+.shop__genre {
+    display: inline-block;
+    margin-right: 10px;
 }
 
 .shop__detail{
-    margin-top:20px;
+    margin-top:10px;
 }
 
 /*ここまで左側*/
@@ -62,7 +68,7 @@
     color: #fff;
     border-radius: 3px;
     position: relative;
-    padding-bottom: 120px;
+    padding-bottom: 50px;
     box-sizing: border-box;
 
 }
@@ -115,7 +121,7 @@
     justify-content: center;
     text-align: center;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     font-size: 1.3rem;
 }
 
@@ -142,7 +148,7 @@
     color: #fff;
     background-color: #3560F6;
     padding: 5px 15px;
-    margin: 20px;
+    margin: 5px;
     border-radius: 5px;
     border: none;
 }
