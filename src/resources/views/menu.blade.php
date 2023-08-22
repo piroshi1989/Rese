@@ -14,10 +14,10 @@
 <div class="nav__content">
     <nav>
         <ul class="menu-nav">
-            <li class="menu-nav__item">
-                <a class="menu-nav__link" href="/">Home</a>
-            </li>
             @guest
+            <li class="menu-nav__item">
+                <a class="menu-nav__link" href="/index">Home</a>
+            </li>
             <li class="menu-nav__item">
                 <a class="menu-nav__link" href="/register">Registration</a>
             </li>
@@ -26,6 +26,9 @@
             </li>
             @endguest
             @auth
+            <li class="menu-nav__item">
+                <a class="menu-nav__link" href="/">Home</a>
+            </li>
             <li class="menu-nav__item">
                 <form class="form" action="/logout" method="post">
                     @csrf

@@ -24,9 +24,9 @@
             <div class="confirm-table">
                 <table class="confirm-table__inner">
                     <tr class="confirm-table__row">
-                        <th class="confirm-table__header">Title</th>
+                        <th class="confirm-table__header">Subject</th>
                         <td class="confirm-table__text">
-                            <input type="text" name="title" class="title"  value="{{ $email['title'] }}" readonly>
+                            <input type="text" name="subject" class="subject"  value="{{ $email['subject'] }}" readonly>
                         </td>
                     </tr>
                     <tr class="confirm-table__row">

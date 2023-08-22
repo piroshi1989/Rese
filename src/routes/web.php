@@ -27,7 +27,7 @@ use App\Http\Controllers\PaymentController;
 
 //ログインしなくてもみられるページ
 Route::get('/menu', [MenuController::class, 'showMenu']);
-Route::get('/', [ShopController::class, 'showShop']);
+Route::get('/index', [ShopController::class, 'showShop']);
 Route::get('/search', [SearchShopsController::class, 'searchShops']);
 Route::get('/detail/{id}', [ShopController::class, 'showShopDetail'])->name('shop_detail');
 
@@ -50,7 +50,6 @@ Route::middleware('verified')->group(function () {
       //予約送信用ルート
       });
     Route::post('/detail/{id}', [ReservationController::class,'store']);
-
     // お気に入りデータ取得用のルート
     Route::get('/getLikedData/{shopId}', [LikeController::class, 'getLikedData']);
     // お気に入りトグル用のルート

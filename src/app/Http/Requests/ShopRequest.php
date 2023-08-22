@@ -25,8 +25,8 @@ class ShopRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string' , 'max:255'],
-            'genre_id' => ['required'],
-            'area_id' => ['required'],
+            'genre_id' => ['required', 'string', 'max:255'],
+            'area_id' => ['required', 'string', 'max:255'],
             'detail' => ['required', 'string', 'max:10000'],
         ];
     }

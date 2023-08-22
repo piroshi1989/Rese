@@ -55,7 +55,11 @@
                     <label for="star5" data-label-num="5"></label>
 
                     <textarea id="comment" name="comment" rows="4" cols="30"></textarea>
+                    @if(empty($userReview))
                     <button class="form__button-submit" type="submit">評価する</button>
+                    @else
+                    <button class="form__button-submit" type="submit">評価を更新する</button>
+                    @endif
                 </form>
             </div>
             <div class="form__error">
