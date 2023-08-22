@@ -173,11 +173,11 @@
                 <input type="hidden" name="form_type" value="mail_form">
                 <div class="form__group">
                     <div class="form__group-content">
-                        <label>Title</label>
-                        <input type="text" name="title" class="title" placeholder="Title" value="{{ old('title') }}">
+                        <label>Subject</label>
+                        <input type="text" name="subject" class="subject" placeholder="Subject" value="{{ old('subject') }}">
                     </div>
                     <div class="form__error">
-                        @error('title')
+                        @error('subject')
                         {{ $message }}
                         @enderror
                     </div>

@@ -29,9 +29,9 @@ class ReservationRequest extends FormRequest
 
         $rules = [
             // 予約フォームの場合のみバリデーションを適用
-            'date' => $formType === 'reservation_form' ? 'required' : '',
+            'date' => $formType === 'reservation_form' ? 'required|date' : '',
             'time' => $formType === 'reservation_form' ? 'required' : '',
-            'number' => $formType === 'reservation_form' ? 'required' : '',
+            'number' => $formType === 'reservation_form' ? 'required|integer|max:10' : '',
             // 他のフォームフィールドのバリデーションルールをここに追加
         ];
 

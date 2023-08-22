@@ -9,6 +9,7 @@ use App\Models\Area;
 use App\Models\Genre;
 use App\Models\Reservation;
 use App\Models\Like;
+use App\Models\Review;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -68,6 +69,12 @@ class ShopController extends Controller
         
         $adminShopId = Auth::check() ? Auth::user()->shop_id : null;
 
-        return view('shop_detail', compact('shop', 'imagePath','options', 'today', 'numbers','reservations', 'adminShopId' ));
+        // ユーザーがその店舗に対してレビューをしているかを判定
+        $userReview = Review::where('user_id', $user_id)
+        ->where('shop_id', $shop->id)
+        ->first();
+
+
+        return view('shop_detail', compact('shop', 'imagePath','options', 'today', 'numbers','reservations', 'adminShopId','userReview' ));
     }
 }

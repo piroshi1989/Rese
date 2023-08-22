@@ -6,26 +6,24 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-
 use Illuminate\Support\Facades\Auth;
-
 use App\Models\User;
 
 class SendNoticeMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $title;
     protected $body;
+    protected $shopName;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($emails)
+    public function __construct($email)
     {
-        $this->title = $emails['title'];
-        $this->body  = $emails['body'];
+        $this->subject = $email['subject'];
+        $this->body  = $email['body'];
 
         $this->senderShop = Auth::user()->shop->name;
     }
@@ -40,6 +38,6 @@ class SendNoticeMail extends Mailable
         return $this->view('emails.notice', [
             'body'  => $this->body,
             'shopName' => $this->senderShop,
-            ])->subject("{$this->title}");
+            ])->subject($this->subject);
     }
 }

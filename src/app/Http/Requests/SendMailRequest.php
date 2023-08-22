@@ -24,16 +24,20 @@ class SendMailRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required',
-            'body'  => 'required',
+            'subject' => ['required', 'string' , 'max:50'],
+            'body'  => ['required', 'string' , 'max:10000'],
         ];
     }
 
     public function messages()
     {
         return [
-            'title.required' => '件名を入力してください',
+            'subject.required' => '件名を入力してください',
+            'subject.string' => '件名を文字列で入力してください',
+            'subject.max' => '件名を50文字以内で入力してください',
             'body.required' => '本文を入力してください',
+            'body.string' => '本文を文字列で入力してください',
+            'body.max' => '本文を10000文字以内で入力してください',
         ];
     }
 }
