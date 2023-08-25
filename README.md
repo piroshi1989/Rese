@@ -113,7 +113,7 @@ $ exit
   
 ・追加実装項目の環境の切り分けではテスト環境用のEC2インスタンスを作成しました
 RDSは別のインスタンスを接続しました  
-本番:http://ec2-52-194-30-90.ap-northeast-1.compute.amazonaws.com/login
+テスト:http://ec2-52-194-30-90.ap-northeast-1.compute.amazonaws.com/login
 テスト:
 ・
 
