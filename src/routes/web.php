@@ -27,11 +27,6 @@ use App\Http\Controllers\PaymentController;
 
 //ログインしなくてもみられるページ
 Route::get('/menu', [MenuController::class, 'showMenu']);
-Route::get('/index', [ShopController::class, 'showShop']);
-Route::get('/search', [SearchShopsController::class, 'searchShops']);
-Route::get('/detail/{id}', [ShopController::class, 'showShopDetail'])->name('shop_detail');
-
-//ログイン必要
 Route::middleware('auth')->group(function () {
   Route::get('/thanks', [ThanksController::class, 'showThanks']);
 });
@@ -39,6 +34,9 @@ Route::middleware('auth')->group(function () {
 //メール認証必要
 Route::middleware('verified')->group(function () {
   Route::get('/', [ShopController::class, 'showShop']);
+  Route::get('/search', [SearchShopsController::class, 'searchShops']);
+  Route::get('/detail/{id}', [ShopController::class, 'showShopDetail'])->name('shop_detail');
+
   //一般ユーザのみ
   Route::group(['middleware' => ['can:user']], function () {
     Route::prefix('mypage')->group(function () {

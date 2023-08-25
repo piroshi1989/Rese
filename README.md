@@ -62,32 +62,59 @@ $ docker-compose up -d --build
 $ docker-compose exec php bash  
 //PHPコンテナ上で以下のコマンドを入力  
 $ composer install  
+$ composer require simplesoftwareio/simple-qr-code  
+$ composer require stripe/stripe-php  
 $ cp .env.example .env  
 $ exit  
-  
+
 envファイルの以下の項目を修正  
 DB_HOST=mysql  
 DB_DATABASE=laravel_db  
 DB_USERNAME=laravel_user  
 DB_PASSWORD=laravel_pass  
+STRIPE_PUBLIC_KEY=pk_test_51xxxxxxxxxxxxxxxxxxx  
+STRIPE_SECRET_KEY=sk_test_51xxxxxxxxxxxxxxxxxxx  
+*51以下は任意のkeyを入力  
   
 $ php artisan key:generate  
 $ php artisan migrate  
 $ php artisan db:seed  
   
-EC2での環境構築  
-参考URL:https://brainlog.jp/server/aws/post-3246/  
-        https://taishou.ne.jp/laravel-s3-connect/  
-        https://zenn.dev/sway/articles/aws_publish_create_rds  
+ホストOSのCronジョブを設定  
+* * * * * cd /path/to/laravel && php artisan schedule:run >> /dev/null 2>&1  
+*localではphpコンテナ内でphp artisan schedule:runを入力  
   
+EC2での環境構築  
+$ sudo yum install -y docker  
+$ sudo service docker start  
+$ sudo usermod -a -G docker ec2-user  
+$ sudo mkdir -p /usr/local/lib/docker/cli-plugins  
+$ sudo curl -SL https://github.com/docker/compose/releases/download/v2.4.1/docker-compose-linux-x86_64 -o /usr/local/lib/docker/cli-plugins/docker-compose  
+$ sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-compose  
+$ sudo systemctl status docker
+$ docker compose up -d  
+$ docker compose exec php bash  
+//PHPコンテナ上で以下のコマンドを入力  
+$ composer install  
+$ composer require endroid/qr-code  
+$ composer require stripe/stripe-php  
+$ cp .env.example .env  
+$ exit  
+以下はRDS,S3の接続を行う  
+
+
 ##他に記載することがあれば記述する
 ・アカウントの種類
 テストユーザー mail:a@gmail.com password:password
 店舗代表者    mail:b@gmail.com password:password
 管理者       mail:c@gmail.com  password:password
 
-・EC2ではS3に接続できているか確認するため、/uploadでファイルアップロード画面を作成しています  
+・店舗の画像はS3に保存し、作成したバケットのURLをpathにしました
   
 ・追加実装項目の環境の切り分けではテスト環境用のEC2インスタンスを作成しました
 RDSは別のインスタンスを接続しました  
-URL:
+テスト:http://ec2-52-194-30-90.ap-northeast-1.compute.amazonaws.com/login
+テスト:
+・
+
+・EC2のlaravelでは.envのmail関連は設定していません。ですので、新規ユーザー作成の場合、認証はURLの末尾に:8080を追加してphpmyadminで直接入力をお願いします。  

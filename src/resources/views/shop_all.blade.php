@@ -53,11 +53,6 @@
                     data-user-id="{{ Auth::id() }}"></i>
                 </div>
                 @endauth
-                @guest
-                <div class="likes__guest">
-                    <i class="bi bi-heart-fill"></i>
-                </div>
-                @endguest
             </div>
         </div>
     </div>
@@ -84,11 +79,11 @@
                     data-user-id="{{ Auth::id() }}"></i>
                 </div>
                 @endauth
-                @guest
+                {{-- @guest
                 <div class="likes__guest">
                     <i class="bi bi-heart-fill"></i>
                 </div>
-                @endguest
+                @endguest --}}
             </div>
         </div>
     </div>

@@ -22,7 +22,7 @@ class ShopController extends Controller
             $user_id = Auth::id();
             $alphabetGenreName = $shop->genre->alphabet_name; // ジャンル名を取得
             $imageName = $alphabetGenreName . '.jpg';// ジャンル名を画像ファイル名として使用
-            $imagePath = 'storage/' . $imageName; // 画像パス
+            $imagePath = 'https://rese-s3.s3.ap-northeast-1.amazonaws.com/' . $imageName; // 画像パス
             $shop->imagePath = $imagePath; // 画像パスを追加
             $likeData = Like::where('user_id', $user_id)->where('shop_id', $shop->id)->exists();
             $shop->likeData = $likeData;
