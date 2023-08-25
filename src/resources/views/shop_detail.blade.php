@@ -153,9 +153,6 @@
             </div>
         </form>
     @endcan
-    @guest
-    <h2 class="arart__message">予約される方はログインしてください</h2>
-    @endguest
     </div>
 </main>
 

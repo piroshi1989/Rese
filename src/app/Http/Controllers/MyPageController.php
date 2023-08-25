@@ -36,7 +36,7 @@ class MyPageController extends Controller
         $likedShops = $likedShops->map(function ($likedShop) {
             $romanizedGenreName = $likedShop->genre->alphabet_name; // ローマ字のジャンル名を取得
             $imageName = $romanizedGenreName . '.jpg';// ジャンル名を画像ファイル名として使用
-            $imagePath = 'storage/' . $imageName; // 画像パス
+            $imagePath = 'https://rese-s3.s3.ap-northeast-1.amazonaws.com/' . $imageName; // 画像パス
             $likedShop->imagePath = $imagePath; // 画像パスを追加
 
             return $likedShop;

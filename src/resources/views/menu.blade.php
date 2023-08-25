@@ -16,7 +16,7 @@
         <ul class="menu-nav">
             @guest
             <li class="menu-nav__item">
-                <a class="menu-nav__link" href="/index">Home</a>
+                <a class="menu-nav__link" href="/">Home</a>
             </li>
             <li class="menu-nav__item">
                 <a class="menu-nav__link" href="/register">Registration</a>
