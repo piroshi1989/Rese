@@ -137,10 +137,10 @@ STRIPE_SECRET_KEY=sk_test_51xxxxxxxxxxxxxxxxxxx
 
 ・店舗の画像はS3に保存し、作成したバケットのURLをpathにしました
   
-・追加実装項目の環境の切り分けではテスト環境用のEC2インスタンスを作成しました
+・追加実装項目の環境の切り分けではテスト環境用のEC2インスタンスを作成しました  
 RDSは別のインスタンスを接続しました  
-本番:http://ec2-52-194-30-90.ap-northeast-1.compute.amazonaws.com/login
-テスト:http://ec2-3-113-123-157.ap-northeast-1.compute.amazonaws.com/login
+本番:http://ec2-52-194-30-90.ap-northeast-1.compute.amazonaws.com/login  
+テスト:http://ec2-3-113-123-157.ap-northeast-1.compute.amazonaws.com/login  
 
 
 ・EC2のlaravelでは.envのmail関連は設定していません。ですので、新規ユーザー作成の場合、認証はURLの末尾に:8080を追加してphpmyadminで直接入力をお願いします。  
