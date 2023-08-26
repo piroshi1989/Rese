@@ -85,6 +85,9 @@ $ php artisan db:seed
 *localではphpコンテナ内でphp artisan schedule:runを入力  
   
 EC2での環境構築  
+$ sudo yum update
+$ sudo yum install git
+$ git clone https://github.com/piroshi1989/Rese.git
 $ sudo yum install -y docker  
 $ sudo service docker start  
 $ sudo usermod -a -G docker ec2-user  
@@ -92,6 +95,7 @@ $ sudo mkdir -p /usr/local/lib/docker/cli-plugins
 $ sudo curl -SL https://github.com/docker/compose/releases/download/v2.4.1/docker-compose-linux-x86_64 -o /usr/local/lib/docker/cli-plugins/docker-compose  
 $ sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-compose  
 $ sudo systemctl status docker
+$ cd Rese
 $ docker compose up -d  
 $ docker compose exec php bash  
 //PHPコンテナ上で以下のコマンドを入力  
@@ -100,7 +104,29 @@ $ composer require endroid/qr-code
 $ composer require stripe/stripe-php  
 $ cp .env.example .env  
 $ exit  
-以下はRDS,S3の接続を行う  
+
+$ docker compose -it exec mysqlのコンテナID bash 
+//mysql
+$ mysql -u admin -p -h RDSのエンドポイントを張り付け
+$ create database laravel_db
+$ exit
+$ exit
+
+$ docker compose exec php bash  
+//PHPコンテナ上で以下のコマンドを入力  
+$ php artisan key:generate  
+$ php artisan migrate  
+$ php artisan db:seed  
+
+.envファイル追記
+DB_HOST=RDSのエンドポイント
+DB_DATABASE=laravel_db  
+DB_USERNAME=admin
+DB_PASSWORD=xxxxxxxxxxx  
+STRIPE_PUBLIC_KEY=pk_test_51xxxxxxxxxxxxxxxxxxx  
+STRIPE_SECRET_KEY=sk_test_51xxxxxxxxxxxxxxxxxxx  
+*51以下は任意のkeyを入力  
+
 
 
 ##他に記載することがあれば記述する
@@ -113,8 +139,8 @@ $ exit
   
 ・追加実装項目の環境の切り分けではテスト環境用のEC2インスタンスを作成しました
 RDSは別のインスタンスを接続しました  
-テスト:http://ec2-52-194-30-90.ap-northeast-1.compute.amazonaws.com/login
-テスト:
-・
+本番:http://ec2-52-194-30-90.ap-northeast-1.compute.amazonaws.com/login
+テスト:http://ec2-3-113-123-157.ap-northeast-1.compute.amazonaws.com/login
+
 
 ・EC2のlaravelでは.envのmail関連は設定していません。ですので、新規ユーザー作成の場合、認証はURLの末尾に:8080を追加してphpmyadminで直接入力をお願いします。  
