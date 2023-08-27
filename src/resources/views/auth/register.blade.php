@@ -31,6 +31,7 @@
             {{ $message }}
             @enderror
             </div>
+        </div>
         <div class="form__group">
             <div class="form__group-content">
                 <i class="bi bi-envelope-fill"></i>
