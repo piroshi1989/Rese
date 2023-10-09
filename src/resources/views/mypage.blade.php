@@ -14,7 +14,6 @@
         </div>
     </div>
 </header>
-
 <main class="mypage">
     @if (session('message'))
     <div class="alert">

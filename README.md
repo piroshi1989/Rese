@@ -57,6 +57,7 @@ nginx 1.12.2
 ##環境構築  
 dockerでの環境構築  
 //コマンドライン上で以下のコマンドを入力  
+$ git clone git@github.com:piroshi1989/Rese.git  
 $ cd Rese  
 $ docker-compose up -d --build  
 $ docker-compose exec php bash  
@@ -64,6 +65,8 @@ $ docker-compose exec php bash
 $ composer install  
 $ composer require simplesoftwareio/simple-qr-code  
 $ composer require stripe/stripe-php  
+$ php artisan storage:link  
+
 $ cp .env.example .env  
 $ exit  
 

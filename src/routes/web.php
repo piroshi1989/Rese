@@ -54,10 +54,13 @@ Route::middleware('verified')->group(function () {
     Route::post('/like', [LikeController::class, 'toggleLike']);
     Route::delete('/like/{likeId}', [LikeController::class, 'toggleLike']);
     //レビュー用ルート
+
     Route::post('/review', [ReviewController::class, 'storeReview']);
+    Route::get('/review/{id}', [ReviewController::class, 'showReview']);
     //決済用ルート
     Route::get('/payment', [PaymentController::class, 'create']);
     Route::post('/payment', [PaymentController::class, 'store']);
+
   });
 
   // 管理者
@@ -81,5 +84,10 @@ Route::middleware('verified')->group(function () {
       Route::post('/register', [AdminController::class, 'storeAdmin']);
       Route::get('/registered',[AdminController::class,'showAdminRegistered']);
     });
+  });
+
+  //管理者、一般ユーザ
+  Route::group(['middleware' => ['can:user_or_superadmin']], function () {
+    Route::delete('/review/delete', [ReviewController::class, 'destroyReview']);
   });
 });

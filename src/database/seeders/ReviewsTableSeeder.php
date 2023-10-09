@@ -14,11 +14,39 @@ class ReviewsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('shop_reviews')->insert([
+        DB::table('reviews')->insert([
         'user_id' => 1,
         'shop_id' => 1,
         'rating' => 5,
         'comment' => 'おいしかった',
+        ]);
+
+        DB::table('reviews')->insert([
+        'user_id' => 2,
+        'shop_id' => 1,
+        'rating' => 4,
+        'comment' => 'ssssssasasa',
+        ]);
+
+        DB::table('reviews')->insert([
+        'user_id' => 3,
+        'shop_id' => 1,
+        'rating' => 3,
+        'comment' => 'sdsadwsaaaaaaaaaaaaaadd',
+        ]);
+
+        DB::table('reviews')->insert([
+        'user_id' => 4,
+        'shop_id' => 1,
+        'rating' => 2,
+        'comment' => 'えええええええええええええええええええええええええええ',
+        ]);
+    
+        DB::table('reviews')->insert([
+        'user_id' => 5,
+        'shop_id' => 1,
+        'rating' => 1,
+        'comment' => 'ggggggggggggggggggggggggfffffffffffff',
         ]);
     }
 }

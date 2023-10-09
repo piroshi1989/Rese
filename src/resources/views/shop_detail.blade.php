@@ -15,7 +15,7 @@
         </div>
         @if (session('message'))
         <div class="alert">
-        {{session('message')}}
+            {{session('message')}}
         </div>
         @endif
         <div class="shop__content">
@@ -35,41 +35,54 @@
                     <p>{{ $shop['detail'] }}</p>
                 </div>
             </div>
-            @can('user')
-            @if ($reservations->isNotEmpty())
-            <div class="star-rating">
-                <form action="/review"  method='post'>
-                    @csrf
-                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                    <input type="hidden" name="form_type" value="review_form">
-                    <input type="hidden" name="shop_id" value="{{ $shop['id'] }}">
-                    <input type="radio" name="rating" value="1" id="star1">
-                    <label for="star1" data-label-num="1"></label>
-                    <input type="radio" name="rating" value="2" id="star2">
-                    <label for="star2" data-label-num="2"></label>
-                    <input type="radio" name="rating" value="3" id="star3">
-                    <label for="star3" data-label-num="3"></label>
-                    <input type="radio" name="rating" value="4" id="star4">
-                    <label for="star4" data-label-num="4"></label>
-                    <input type="radio" name="rating" value="5" id="star5">
-                    <label for="star5" data-label-num="5"></label>
-
-                    <textarea id="comment" name="comment" rows="4" cols="30"></textarea>
-                    @if(empty($userReview))
-                    <button class="form__button-submit" type="submit">評価する</button>
-                    @else
-                    <button class="form__button-submit" type="submit">評価を更新する</button>
-                    @endif
-                </form>
-            </div>
-            <div class="form__error">
-                @error('rating')
-                <p>ERROR</p>
-                <p class="error">{{ $message }}</p>
-                @enderror
+            @if ($reservations->isNotEmpty() && empty($userReview))
+            <div class="rating">
+                <a class= "review__link" href="{{ asset('/review/'. $shop->id)}}">口コミを投稿する</a>
             </div>
             @endif
-            @endcan
+            @if($reviews->isNotEmpty())
+            <div class="review">
+                <h3 class="review__title">全ての口コミ情報</h3>
+                <hr>
+                <div class="review-details">
+                    @foreach($reviews as $review)
+                    <div class="review-actions">
+                        @if($review->user_id == $user_id)
+                        <a class= "review__link" href="{{ asset('/review/'. $review['shop_id'])}}">口コミを編集</a>
+                        <form action="/review/delete" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <div class="review-delete-form">
+                                <input type="hidden" name="id" value="{{ $review['id'] }}">
+                                <input type="hidden" name="shop_id" value="{{ $review['shop_id'] }}">
+                                <button class="delete-form__button-submit" type="submit">削除</button>
+                            </div>
+                        </form>
+                        @endif
+                        @can('superadmin')
+                        <form action="/review/delete" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <div class="review-delete-form">
+                                <input type="hidden" name="id" value="{{ $review['id'] }}">
+                                <input type="hidden" name="shop_id" value="{{ $review['shop_id'] }}">
+                                <button class="delete-form__button-submit" type="submit">削除</button>
+                            </div>
+                        </form>
+                        @endcan
+                    </div>
+                    <h4 class="rating__text">{{ $review->reviewText }}</h4>
+                    @for ($i = 1; $i <= 5; $i++)
+                        <i class="bi bi-star-fill{{ $i <= $review->rating ? ' fill' : '' }}"></i>
+                    @endfor
+                    <div class="review-comments">
+                        {{ $review->comment }}
+                    </div>
+                    <hr>
+                    @endforeach
+                </div>
+            </div>
+            @endif
         </div>
         @if($adminShopId == $shop->id)
         @can('admin')
@@ -85,6 +98,7 @@
         </div>
         @endcan
         @endif
+        </div>
     </div>
     @can('user')
     <div class = "right__content__reservation">
@@ -152,8 +166,8 @@
                 <input type="submit" value="予約する">
             </div>
         </form>
-    @endcan
     </div>
+    @endcan
 </main>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
