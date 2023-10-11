@@ -87,7 +87,7 @@ class CsvController extends Controller
     }
 
     foreach ($shops as $shop) {
-        if (empty($shop['detai'])) {
+        if (empty($shop['detail'])) {
             throw new \Exception('Error: 詳細情報が空です。');
         }
     }
