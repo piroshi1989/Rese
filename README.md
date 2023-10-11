@@ -9,6 +9,7 @@ Rese
 
 ##作成した目的  
 COACHTECH Web開発上級案件  
+COACHTECH pro 入会テスト  
 
 ##アプリケーションURL  
   
@@ -27,8 +28,7 @@ COACHTECH Web開発上級案件
 ・飲食店お気に入り追加、削除  
 ・飲食店予約情報追加、削除、更新  
 ・飲食店のエリア、ジャンル、店名で検索する検索機能  
-・評価機能(予約時間が過ぎるとユーザーが店舗を5段階評価とコメントができる)  
-・バリデーション(ログイン、予約、評価、メール送信、店舗情報作成の際にバリデーションをかける)  
+バリデーション(ログイン、予約、評価、メール送信、店舗情報作成の際にバリデーションをかける)  
 ・権限管理(管理者、店舗代表者、利用者作成)  
 ・飲食店情報作成、更新(上記の店舗代表者のみ権限付与)  
 ・店舗代表者登録(上記の管理者のみ権限付与)  
@@ -38,6 +38,10 @@ COACHTECH Web開発上級案件
 ・QRコード作成(店舗代表者のみ照合可能。照合すると当日の予約情報確認画面へ遷移)  
 ・決済(Stripeを利用した決済)  
 ・レスポンシブデザイン(ブレイクポイント768px)  
+・口コミ機能(予約時間が過ぎるとユーザーが店舗を5段階評価とコメントができる)  
+・口コミ編集、削除機能  
+・店舗一覧ソート機能  
+・csvインポート機能(店舗情報追加)  
   
 ##使用技術  
 Laravel 8.75  
@@ -57,6 +61,7 @@ nginx 1.12.2
 ##環境構築  
 dockerでの環境構築  
 //コマンドライン上で以下のコマンドを入力  
+$ git clone git@github.com:piroshi1989/Rese.git  
 $ cd Rese  
 $ docker-compose up -d --build  
 $ docker-compose exec php bash  
@@ -64,6 +69,8 @@ $ docker-compose exec php bash
 $ composer install  
 $ composer require simplesoftwareio/simple-qr-code  
 $ composer require stripe/stripe-php  
+$ php artisan storage:link  
+
 $ cp .env.example .env  
 $ exit  
 
@@ -85,9 +92,6 @@ $ php artisan db:seed
 *localではphpコンテナ内でphp artisan schedule:runを入力  
   
 EC2での環境構築  
-$ sudo yum update
-$ sudo yum install git
-$ git clone https://github.com/piroshi1989/Rese.git
 $ sudo yum install -y docker  
 $ sudo service docker start  
 $ sudo usermod -a -G docker ec2-user  
@@ -95,7 +99,6 @@ $ sudo mkdir -p /usr/local/lib/docker/cli-plugins
 $ sudo curl -SL https://github.com/docker/compose/releases/download/v2.4.1/docker-compose-linux-x86_64 -o /usr/local/lib/docker/cli-plugins/docker-compose  
 $ sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-compose  
 $ sudo systemctl status docker
-$ cd Rese
 $ docker compose up -d  
 $ docker compose exec php bash  
 //PHPコンテナ上で以下のコマンドを入力  
@@ -104,44 +107,22 @@ $ composer require endroid/qr-code
 $ composer require stripe/stripe-php  
 $ cp .env.example .env  
 $ exit  
-
-$ docker compose -it exec mysqlのコンテナID bash 
-//mysql
-$ mysql -u admin -p -h RDSのエンドポイントを張り付け
-$ create database laravel_db
-$ exit
-$ exit
-
-$ docker compose exec php bash  
-//PHPコンテナ上で以下のコマンドを入力  
-$ php artisan key:generate  
-$ php artisan migrate  
-$ php artisan db:seed  
-
-.envファイル追記
-DB_HOST=RDSのエンドポイント
-DB_DATABASE=laravel_db  
-DB_USERNAME=admin
-DB_PASSWORD=xxxxxxxxxxx  
-STRIPE_PUBLIC_KEY=pk_test_51xxxxxxxxxxxxxxxxxxx  
-STRIPE_SECRET_KEY=sk_test_51xxxxxxxxxxxxxxxxxxx  
-*51以下は任意のkeyを入力  
-
+以下はRDS,S3の接続を行う  
 
 
 ##他に記載することがあれば記述する
 ・アカウントの種類
 テストユーザー mail:a@gmail.com password:password
-店舗代表者    mail:b@gmail.com password:password
-管理者       mail:c@gmail.com  password:password
+テストユーザー mail:b@gmail.com password:password
+テストユーザー mail:c@gmail.com password:password
+テストユーザー mail:d@gmail.com password:password
+テストユーザー mail:e@gmail.com password:password
+店舗代表者    mail:f@gmail.com password:password
+管理者       mail:g@gmail.com  password:password
 
-・店舗の画像はS3に保存し、作成したバケットのURLをpathにしました
+・店舗の画像はS3に保存し、作成したバケットのURLをpathにしました  
+
+・EC2のlaravelでは.envのmail関連は設定していません。ですので、新規ユーザー作成の場合、認証はURLの末尾に:8080を追加してphpmyadminで直接入力をお願いします。  
   
-・追加実装項目の環境の切り分けではテスト環境用のEC2インスタンスを作成しました  
-RDSは別のインスタンスを接続しました  
-本番:http://ec2-52-194-30-90.ap-northeast-1.compute.amazonaws.com/login  
-テスト:http://ec2-3-113-123-157.ap-northeast-1.compute.amazonaws.com/login  
-
-
-・EC2では.envのmail関連は設定していません。ですので、新規ユーザー作成の場合、認証はURLの末尾に:8080を追加してphpmyadminで直接入力をお願いします。  
-メール送信は不可です。
+・csvでアップロードする際、csvファイルの1行目(header)は以下の画像の通りです。
+![image](https://github.com/piroshi1989/Rese/assets/123999429/a582b5ab-b550-4149-86c1-54375d62422f)
