@@ -39,13 +39,13 @@
             <div class="rating">
                 <a class= "review__link" href="{{ asset('/review/'. $shop->id)}}">口コミを投稿する</a>
             </div>
-            @endif
-            @if($reviews->isNotEmpty())
+            @elseif($reviews->isNotEmpty())
             <div class="review">
                 <h3 class="review__title">全ての口コミ情報</h3>
                 <hr>
                 <div class="review-details">
                     @foreach($reviews as $review)
+                    @if($review['shop_id'] == $shop->id)
                     <div class="review-actions">
                         @if($review->user_id == $user_id)
                         <a class= "review__link" href="{{ asset('/review/'. $review['shop_id'])}}">口コミを編集</a>
@@ -79,6 +79,7 @@
                         {{ $review->comment }}
                     </div>
                     <hr>
+                    @endif
                     @endforeach
                 </div>
             </div>

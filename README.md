@@ -9,6 +9,7 @@ Rese
 
 ##作成した目的  
 COACHTECH Web開発上級案件  
+COACHTECH pro 入会テスト  
 
 ##アプリケーションURL  
   
@@ -27,7 +28,6 @@ COACHTECH Web開発上級案件
 ・飲食店お気に入り追加、削除  
 ・飲食店予約情報追加、削除、更新  
 ・飲食店のエリア、ジャンル、店名で検索する検索機能  
-・評価機能(予約時間が過ぎるとユーザーが店舗を5段階評価とコメントができる)  
 バリデーション(ログイン、予約、評価、メール送信、店舗情報作成の際にバリデーションをかける)  
 ・権限管理(管理者、店舗代表者、利用者作成)  
 ・飲食店情報作成、更新(上記の店舗代表者のみ権限付与)  
@@ -38,6 +38,10 @@ COACHTECH Web開発上級案件
 ・QRコード作成(店舗代表者のみ照合可能。照合すると当日の予約情報確認画面へ遷移)  
 ・決済(Stripeを利用した決済)  
 ・レスポンシブデザイン(ブレイクポイント768px)  
+・口コミ機能(予約時間が過ぎるとユーザーが店舗を5段階評価とコメントができる)  
+・口コミ編集、削除機能  
+・店舗一覧ソート機能  
+・csvインポート機能(店舗情報追加)  
   
 ##使用技術  
 Laravel 8.75  
@@ -109,15 +113,16 @@ $ exit
 ##他に記載することがあれば記述する
 ・アカウントの種類
 テストユーザー mail:a@gmail.com password:password
-店舗代表者    mail:b@gmail.com password:password
-管理者       mail:c@gmail.com  password:password
+テストユーザー mail:b@gmail.com password:password
+テストユーザー mail:c@gmail.com password:password
+テストユーザー mail:d@gmail.com password:password
+テストユーザー mail:e@gmail.com password:password
+店舗代表者    mail:f@gmail.com password:password
+管理者       mail:g@gmail.com  password:password
 
-・店舗の画像はS3に保存し、作成したバケットのURLをpathにしました
-  
-・追加実装項目の環境の切り分けではテスト環境用のEC2インスタンスを作成しました
-RDSは別のインスタンスを接続しました  
-テスト:http://ec2-52-194-30-90.ap-northeast-1.compute.amazonaws.com/login
-テスト:
-・
+・店舗の画像はS3に保存し、作成したバケットのURLをpathにしました  
 
 ・EC2のlaravelでは.envのmail関連は設定していません。ですので、新規ユーザー作成の場合、認証はURLの末尾に:8080を追加してphpmyadminで直接入力をお願いします。  
+  
+・csvでアップロードする際、csvファイルの1行目(header)は以下の画像の通りです。
+![image](https://github.com/piroshi1989/Rese/assets/123999429/a582b5ab-b550-4149-86c1-54375d62422f)

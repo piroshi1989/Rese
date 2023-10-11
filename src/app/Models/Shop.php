@@ -65,4 +65,33 @@ class Shop extends Model
     {
         return $this->hasMany(Review::class, 'shop_id', 'id');
     }
+
+    //csv upload
+    public function csvHeader(): array
+    {
+        return [
+            'id',
+            'name',
+            'genre_id',
+            'area_id',
+            'detail',
+            'image',
+        ];
+    }
+
+    public function getCsvData(): \Illuminate\Support\Collection
+    {
+        $data = DB::table('shops')->get();
+        return $data;
+    }
+    public function insertRow($row): array
+    {
+        return [
+            $row->name,
+            $row->genre_id,
+            $row->area_id,
+            $row->detail,
+            $row->image,
+        ];
+    }
 }

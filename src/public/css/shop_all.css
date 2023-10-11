@@ -18,7 +18,9 @@ form {
     justify-content: space-between;
     align-items: center;
 }
-
+.sort{
+    width:57%;
+}
 select {
     width: 30%;
     margin: 0;
@@ -124,6 +126,17 @@ input {
 
 .liked {
     color:red;
+}
+
+.sort-form__content{
+    width:80%;
+    margin:20px;
+    margin-bottom:10px;
+    align-items: center;
+    height: 30%;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 3px 3px 3px gray;
 }
 
 @media screen and (max-width: 768px) {

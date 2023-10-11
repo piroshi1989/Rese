@@ -9,12 +9,14 @@ use App\Models\Reservation;
 use App\Models\Like;
 use App\Models\Review;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
 {
-    public function showShop(){
-        $shops = Shop::with('area', 'genre')->get()->sortBy('id');
+    public function showShop(Request $request){
+
+        $shops = Shop::all();
 
         $shops = $shops->map(function ($shop) {
             $user_id = Auth::id();
@@ -24,9 +26,43 @@ class ShopController extends Controller
             $shop->imagePath = $imagePath; // 画像パスを追加
             $likeData = Like::where('user_id', $user_id)->where('shop_id', $shop->id)->exists();
             $shop->likeData = $likeData;
+            $ratings = Review::where('shop_id', $shop->id)->pluck('rating')->toArray();
+
+            // 評価が存在する場合、平均値を計算
+            if (!empty($ratings)) {
+                $averageRating = array_sum($ratings) / count($ratings);
+            } else {
+                $averageRating = 0; // 評価がない場合は0として扱う（または適切なデフォルト値）
+            }
+
+            // 各店舗に平均評価を追加
+            $shop->average_rating = $averageRating;
 
             return $shop;
         });
+
+        // ソートのパラメータを取得
+        $sort = $request->input('sort', 'default');
+
+        switch ($sort) {
+            case 'random':
+                $shops = $shops->shuffle();
+                    break;
+            case 'rating_desc':
+                // 平均評価が高い順に並び替え
+                $shops = $shops->sortByDesc('average_rating')->values();
+                    break;
+            case 'rating_asc':
+                $shops = $shops->sortBy(function ($shop) {
+                    // 平均評価が0の場合、無限大(INF)を返す
+                    return $shop->average_rating === 0 ? INF : $shop->average_rating;
+                })->values();
+                    break;
+            default:
+                // デフォルトの並び替え方法を指定（最新順）
+                $shops = $shops->sortBy('created_at')->values();
+                break;
+        }
 
         $areas = Area::all();
         $genres = Genre::all();

@@ -13,6 +13,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ShopRegisterController;
 use App\Http\Controllers\SendMailController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\CsvController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,6 +85,8 @@ Route::middleware('verified')->group(function () {
       Route::post('/register', [AdminController::class, 'storeAdmin']);
       Route::get('/registered',[AdminController::class,'showAdminRegistered']);
     });
+    Route::get('/csv.upload',[CsvController::class,'showCsvUpload']);
+    Route::post('/csv.upload',[CsvController::class,'importCsv']);
   });
 
   //管理者、一般ユーザ

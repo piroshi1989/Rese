@@ -39,6 +39,9 @@
             <li class="menu-nav__item">
                 <a class="menu-nav__link" href="/admin/register">AdminRegistration</a>
             </li>
+            <li class="menu-nav__item">
+                <a class="menu-nav__link" href="/csv.upload">csv.upload</a>
+            </li>
             @endcan
             @can('admin')
             <li class="menu-nav__item">
