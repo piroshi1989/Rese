@@ -125,4 +125,5 @@ $ exit
 ・EC2のlaravelでは.envのmail関連は設定していません。ですので、新規ユーザー作成の場合、認証はURLの末尾に:8080を追加してphpmyadminで直接入力をお願いします。  
   
 ・csvでアップロードする際、csvファイルの1行目(header)は以下の画像の通りです。
-![image](https://github.com/piroshi1989/Rese/assets/123999429/a582b5ab-b550-4149-86c1-54375d62422f)
+![image](https://github.com/piroshi1989/Rese/assets/123999429/b84c58a6-dae3-4ad2-900e-16e962fbbb21)
+
