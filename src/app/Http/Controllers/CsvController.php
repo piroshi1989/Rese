@@ -109,18 +109,6 @@ class CsvController extends Controller
         if (mb_strlen($shop['detail']) > 400) {
             throw new \Exception('Error: 詳細が400文字を超えています。');
         }
-        if (!empty($shop->image)) {
-            $imageExtensions = ['jpg', 'png'];
-    
-            $imageExtensionsFound = array_filter($shop->image, function ($image) use ($imageExtensions) {
-                $extension = pathinfo($image, PATHINFO_EXTENSION);
-                return in_array($extension, $imageExtensions);
-            });
-    
-            if (empty($imageExtensionsFound)) {
-                throw new \Exception('Error: 画像が.jpgまたは.png形式で指定されていません。');
-            }
-        }
     });
 
     DB::table('shops')->insert($shops->toArray());
