@@ -11,6 +11,18 @@
             <a class="icon-link rese" href="/menu">
             <i class="bi bi-list" id="menu__icon" aria-hidden="true"></i>Rese</a>
         </div>
+        <form method="GET" action="/" id="form">
+            <div class="sort-form__content">
+                <input type="hidden" name="form__type" value="sort__form">
+                <label for="sort">並び替え:</label>
+                <select name="sort" id="sort" class="sort">
+                    <option value="" selected disabled>選択してください</option>
+                    <option value="random" {{ request()->input('sort') === 'random' ? 'selected' : '' }}>ランダム</option>
+                    <option value="rating_desc" {{ request()->input('sort') === 'rating_desc' ? 'selected' : '' }}>評価が高い順</option>
+                    <option value="rating_asc" {{ request()->input('sort') === 'rating_asc' ? 'selected' : '' }}>評価が低い順</option>
+                </select>
+            </div>
+        </form>
         <div class="search__form">
             <form action="/search" method="get">
                 @csrf
@@ -52,6 +64,8 @@
                     data-shop-id="{{ $shop['id'] }}"
                     data-user-id="{{ Auth::id() }}"></i>
                 </div>
+                {{--  平均評価数確認用 --}}
+                {{ $shop->average_rating }}
                 @endauth
             </div>
         </div>
@@ -78,12 +92,9 @@
                     data-shop-id="{{ $shop['id'] }}"
                     data-user-id="{{ Auth::id() }}"></i>
                 </div>
+                {{--  平均評価数確認用 --}}
+                {{-- { $shop->average_rating }}  --}}
                 @endauth
-                {{-- @guest
-                <div class="likes__guest">
-                    <i class="bi bi-heart-fill"></i>
-                </div>
-                @endguest --}}
             </div>
         </div>
     </div>
@@ -93,4 +104,14 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{{ asset('js/ajaxlike.js') }}"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const filterForm = document.getElementById("form");
+        const selectBox = document.getElementById("sort");
+
+        selectBox.addEventListener("change", function() {
+            form.submit();
+            });
+    });
+</script>
 @endsection

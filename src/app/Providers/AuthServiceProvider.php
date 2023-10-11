@@ -36,5 +36,10 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('user', function ($user) {
         return ($user->role == 0);
         });
+
+        // 一般ユーザ,店舗代表者に許可
+        Gate::define('user_or_superadmin', function ($user) {
+            return in_array($user->role, [0, 2]);
+            });
     }
 }

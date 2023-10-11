@@ -19,6 +19,7 @@ class CreateShopsTable extends Migration
             $table->foreignId('genre_id')->constrained();
             $table->foreignId('area_id')->constrained();
             $table->text('detail',1000);
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

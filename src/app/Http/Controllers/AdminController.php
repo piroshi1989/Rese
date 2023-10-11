@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-//use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Models\Shop;
 use App\Models\User;

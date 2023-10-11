@@ -25,13 +25,17 @@ class ReviewRequest extends FormRequest
     {
         return [
             'rating' => ['required','integer','min:1','max:5'],
+            'comment' => ['nullable', 'string', 'max:400'],
+            'image' => ['mimes:jpeg,png'],
         ];
     }
 
     public function messages()
     {
         return [
-            'rating.required' => '星をクリックして評価してください',
+            'rating.required' => '星を選択して評価してください',
+            'comment.max' => '400文字以下で入力してください',
+            'image.mines' => 'ファイル形式を.jpeg,もしくは.pngでアップロードしてください',
         ];
     }
 }

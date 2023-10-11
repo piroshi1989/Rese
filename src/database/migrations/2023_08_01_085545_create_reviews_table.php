@@ -19,6 +19,7 @@ class CreateReviewsTable extends Migration
         $table->foreignId('shop_id')->constrained()->cascadeOnDelete();
         $table->integer('rating')->default(0)->comment('星');
         $table->text('comment')->comment('コメント')->nullable();
+        $table->string('image_url')->nullable();
         $table->timestamps();
     });
     }
