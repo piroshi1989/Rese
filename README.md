@@ -110,20 +110,18 @@ $ exit
 以下はRDS,S3の接続を行う  
 
 
-##他に記載することがあれば記述する
-・アカウントの種類
-テストユーザー mail:a@gmail.com password:password
-テストユーザー mail:b@gmail.com password:password
-テストユーザー mail:c@gmail.com password:password
-テストユーザー mail:d@gmail.com password:password
-テストユーザー mail:e@gmail.com password:password
-店舗代表者    mail:f@gmail.com password:password
-管理者       mail:g@gmail.com  password:password
-
+##他に記載することがあれば記述する  
+・アカウントの種類  
+テストユーザー mail:a@gmail.com password:password  
+テストユーザー mail:b@gmail.com password:password  
+テストユーザー mail:c@gmail.com password:password  
+テストユーザー mail:d@gmail.com password:password  
+テストユーザー mail:e@gmail.com password:password  
+店舗代表者    mail:f@gmail.com password:password  
+管理者       mail:g@gmail.com  password:password  
+  
 ・店舗の画像はS3に保存し、作成したバケットのURLをpathにしました  
-
-・EC2のlaravelでは.envのmail関連は設定していません。ですので、新規ユーザー作成の場合、認証はURLの末尾に:8080を追加してphpmyadminで直接入力をお願いします。  
   
 ・csvでアップロードする際、csvファイルの1行目(header)は以下の画像の通りです。
-![image](https://github.com/piroshi1989/Rese/assets/123999429/b84c58a6-dae3-4ad2-900e-16e962fbbb21)
+![image](https://github.com/piroshi1989/Rese/assets/123999429/cb4f88fe-e90b-4d34-b132-50c22967fd26)
 
