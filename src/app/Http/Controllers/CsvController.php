@@ -109,6 +109,7 @@ class CsvController extends Controller
         if (mb_strlen($shop['detail']) > 400) {
             throw new \Exception('Error: 詳細が400文字を超えています。');
         }
+
     });
 
     DB::table('shops')->insert($shops->toArray());
