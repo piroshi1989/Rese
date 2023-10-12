@@ -39,26 +39,28 @@ class CsvController extends Controller
         // $csvを元に行単位のコレクション作成。explodeで改行ごとに分解
         $uploadedData = collect(explode("\n", $csv));
 
-        // テーブルとCSVファイルのヘッダーの比較
         $header = array('name', 'genre', 'area', 'detail', 'image');
         $uploadedHeader = collect(explode(",", $uploadedData->shift()));
-        if (count($header) !== count($uploadedHeader)) {
-            throw new \Exception('Error:ヘッダーが一致しません');
+        
+        if (count($header) !== count($uploadedHeader) || array_diff($header, $uploadedHeader->toArray())) {
+            throw new \Exception('Error: ヘッダーが一致しません');
         }
 
         // 連想配列を作成
-        try {
-            $shops = $uploadedData->map(function($oneRecord) use ($header) {
-                $values = explode(",", $oneRecord);
-                $record = [];
-                foreach ($header as $index => $key) {
-                    $record[$key] = $values[$index];
+        $shops = $uploadedData->map(function($oneRecord) use ($header) {
+            $values = explode(",", $oneRecord);
+            $record = [];
+            foreach ($header as $index => $key) {
+                if (!isset($values[$index])) {
+                    throw new \Exception('Error: ヘッダーとデータの要素が一致しないものがあります');
                 }
-                return $record;
-            });
-        } catch (\Exception $e) {
-            throw new \Exception('Error:ヘッダーが一致しません');
-        }
+                $record[$key] = $values[$index];
+            }
+            if (count($header) !== count($record)) {
+                throw new \Exception('Error: ヘッダーとデータの要素数が一致しません');
+            }
+            return $record;
+        });
 
         // 既存データとの重複チェック（nameカラム）
         $duplicateNames = Shop::whereIn('name', $shops->pluck('name'))->pluck('name');
@@ -72,13 +74,17 @@ class CsvController extends Controller
     $genreMap = Genre::whereIn('name', $shops->pluck('genre'))->pluck('id', 'name');
     $areaMap = Area::whereIn('name', $shops->pluck('area'))->pluck('id', 'name');
 
-    if ($genreMap->isEmpty()) {
-        throw new \Exception('Error: ジャンル情報が見つかりませんでした。');
-    }
+       // ジャンル名に該当しないものを検出
+       $nonExistentGenres = $shops->pluck('genre')->diff($genreMap->keys());
+       if ($nonExistentGenres->isNotEmpty()) {
+           throw new \Exception('Error: 存在しないジャンル名 - ' . $nonExistentGenres->implode(', '));
+       }
 
-    if ($areaMap->isEmpty()) {
-        throw new \Exception('Error: エリア情報が見つかりませんでした。');
-    }
+       // エリア名に該当しないものを検出
+       $nonExistentAreas = $shops->pluck('area')->diff($areaMap->keys());
+       if ($nonExistentAreas->isNotEmpty()) {
+           throw new \Exception('Error: 存在しないエリア名 - ' . $nonExistentAreas->implode(', '));
+       }
 
     foreach ($shops as $shop) {
         if (empty($shop['name'])) {
