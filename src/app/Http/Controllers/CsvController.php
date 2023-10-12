@@ -104,8 +104,8 @@ class CsvController extends Controller
         $values = explode(",", $oneRecord);
         if (!in_array(pathinfo($values[$imageHeaderIndex], PATHINFO_EXTENSION), ['jpg', 'png'], true)) {
             throw new \Exception('Error: "image" の拡張子は.jpgまたは.pngである必要があります');
+        }
     }
-}
 
     // $shops 配列内の各要素にIDを追加
     $shops = $shops->map(function ($shop) use ($genreMap, $areaMap) {
